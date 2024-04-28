@@ -1,6 +1,6 @@
 server:
   servlet:
-    context-path: /sanyuan
+    context-path: /poker
   port: 8709
 
 spring:
