@@ -11,8 +11,8 @@ import com.baomidou.mybatisplus.annotation.TableLogic;
 import lombok.Data;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.jeecgframework.poi.excel.annotation.Excel;
-import org.jeecg.common.aspect.annotation.Dict;
+
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.EqualsAndHashCode;
@@ -53,35 +53,35 @@ public class UserInfo implements Serializable {
     @ApiModelProperty(value = "更新日期")
     private java.util.Date updateTime;
 	/**昵称*/
-	@Excel(name = "昵称", width = 15)
+	
     @ApiModelProperty(value = "昵称")
     private java.lang.String nickName;
 	/**邮箱*/
-	@Excel(name = "邮箱", width = 15)
+	
     @ApiModelProperty(value = "邮箱")
     private java.lang.String email;
 	/**密码*/
-	@Excel(name = "密码", width = 15)
+	
     @ApiModelProperty(value = "密码")
     private java.lang.String password;
 	/**账号*/
-	@Excel(name = "账号", width = 15)
+	
     @ApiModelProperty(value = "账号")
     private java.lang.String account;
 	/**手机号码*/
-	@Excel(name = "手机号码", width = 15)
+	
     @ApiModelProperty(value = "手机号码")
     private java.lang.String mobile;
 	/**性别*/
-	@Excel(name = "性别", width = 15)
+	
     @ApiModelProperty(value = "性别")
     private java.lang.Integer sex;
 	/**游戏ID*/
-	@Excel(name = "游戏ID", width = 15)
+	
     @ApiModelProperty(value = "游戏ID")
     private java.lang.String gameId;
 	/**图像*/
-	@Excel(name = "图像", width = 15)
+	
     @ApiModelProperty(value = "图像")
     private java.lang.String avatar;
 }

@@ -11,8 +11,8 @@ import com.baomidou.mybatisplus.annotation.TableLogic;
 import lombok.Data;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.jeecgframework.poi.excel.annotation.Excel;
-import org.jeecg.common.aspect.annotation.Dict;
+
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.EqualsAndHashCode;
@@ -53,19 +53,19 @@ public class PrizePoolRecord implements Serializable {
     @ApiModelProperty(value = "更新日期")
     private java.util.Date updateTime;
 	/**奖池*/
-	@Excel(name = "奖池", width = 15)
+	
     @ApiModelProperty(value = "奖池")
     private java.lang.String poolId;
 	/**实例*/
-	@Excel(name = "实例", width = 15)
+	
     @ApiModelProperty(value = "实例")
     private java.lang.String instanceId;
 	/**金额*/
-	@Excel(name = "金额", width = 15)
+	
     @ApiModelProperty(value = "金额")
     private java.math.BigDecimal amount;
 	/**用户*/
-	@Excel(name = "用户", width = 15)
+	
     @ApiModelProperty(value = "用户")
     private java.lang.String userId;
 }

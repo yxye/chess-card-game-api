@@ -11,8 +11,8 @@ import com.baomidou.mybatisplus.annotation.TableLogic;
 import lombok.Data;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.jeecgframework.poi.excel.annotation.Excel;
-import org.jeecg.common.aspect.annotation.Dict;
+
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.EqualsAndHashCode;
@@ -53,11 +53,11 @@ public class InstanceUser implements Serializable {
     @ApiModelProperty(value = "更新日期")
     private java.util.Date updateTime;
 	/**用户ID*/
-	@Excel(name = "用户ID", width = 15)
+	
     @ApiModelProperty(value = "用户ID")
     private java.lang.String uesrId;
 	/**房间ID*/
-	@Excel(name = "房间ID", width = 15)
+	
     @ApiModelProperty(value = "房间ID")
     private java.lang.String roomId;
 }

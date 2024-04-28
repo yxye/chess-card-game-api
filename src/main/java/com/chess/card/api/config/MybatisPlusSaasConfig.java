@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@MapperScan(value={"com.sanyuan.**.mapper*"})
+@MapperScan(value={"com.chess.**.mapper*"})
 public class MybatisPlusSaasConfig {
 
     @Bean

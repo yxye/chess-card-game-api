@@ -11,8 +11,8 @@ import com.baomidou.mybatisplus.annotation.TableLogic;
 import lombok.Data;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.jeecgframework.poi.excel.annotation.Excel;
-import org.jeecg.common.aspect.annotation.Dict;
+
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.EqualsAndHashCode;
@@ -53,31 +53,31 @@ public class GameRoomTpl implements Serializable {
     @ApiModelProperty(value = "更新日期")
     private java.util.Date updateTime;
 	/**房间名称*/
-	@Excel(name = "房间名称", width = 15)
+	
     @ApiModelProperty(value = "房间名称")
     private java.lang.String roomName;
 	/**带入记分牌*/
-	@Excel(name = "带入记分牌", width = 15)
+	
     @ApiModelProperty(value = "带入记分牌")
     private java.lang.String bringIn;
 	/**记分牌上限，-1不限制*/
-	@Excel(name = "记分牌上限，-1不限制", width = 15)
+	
     @ApiModelProperty(value = "记分牌上限，-1不限制")
     private java.lang.String bringInUp;
 	/**用户数*/
-	@Excel(name = "用户数", width = 15)
+	
     @ApiModelProperty(value = "用户数")
     private java.lang.Integer userNum;
 	/**活跃度积分*/
-	@Excel(name = "活跃度积分", width = 15)
+	
     @ApiModelProperty(value = "活跃度积分")
     private java.lang.Integer activityScore;
 	/**赌注*/
-	@Excel(name = "赌注", width = 15)
+	
     @ApiModelProperty(value = "赌注")
     private java.lang.Integer ante;
 	/**straddle状态*/
-	@Excel(name = "straddle状态", width = 15)
+	
     @ApiModelProperty(value = "straddle状态")
     private java.lang.Integer straddle;
 }

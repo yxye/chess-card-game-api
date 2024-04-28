@@ -11,8 +11,8 @@ import com.baomidou.mybatisplus.annotation.TableLogic;
 import lombok.Data;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.jeecgframework.poi.excel.annotation.Excel;
-import org.jeecg.common.aspect.annotation.Dict;
+
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.EqualsAndHashCode;
@@ -53,19 +53,19 @@ public class InstancePrizePool implements Serializable {
     @ApiModelProperty(value = "更新日期")
     private java.util.Date updateTime;
 	/**实例ID*/
-	@Excel(name = "实例ID", width = 15)
+	
     @ApiModelProperty(value = "实例ID")
     private java.lang.String instanceId;
 	/**金额*/
-	@Excel(name = "金额", width = 15)
+	
     @ApiModelProperty(value = "金额")
     private java.math.BigDecimal amount;
 	/**类型：0主奖池，大于0为边池*/
-	@Excel(name = "类型：0主奖池，大于0为边池", width = 15)
+	
     @ApiModelProperty(value = "类型：0主奖池，大于0为边池")
     private java.lang.Integer poolType;
 	/**房间*/
-	@Excel(name = "房间", width = 15)
+	
     @ApiModelProperty(value = "房间")
     private java.lang.String roomId;
 }

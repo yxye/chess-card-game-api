@@ -11,8 +11,8 @@ import com.baomidou.mybatisplus.annotation.TableLogic;
 import lombok.Data;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.jeecgframework.poi.excel.annotation.Excel;
-import org.jeecg.common.aspect.annotation.Dict;
+
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.EqualsAndHashCode;
@@ -53,19 +53,19 @@ public class RoomUser implements Serializable {
     @ApiModelProperty(value = "更新日期")
     private java.util.Date updateTime;
 	/**用户*/
-	@Excel(name = "用户", width = 15)
+	
     @ApiModelProperty(value = "用户")
     private java.lang.String userId;
 	/**座位顺序*/
-	@Excel(name = "座位顺序", width = 15)
+	
     @ApiModelProperty(value = "座位顺序")
     private java.lang.Integer seqtIndex;
 	/**用户session*/
-	@Excel(name = "用户session", width = 15)
+	
     @ApiModelProperty(value = "用户session")
     private java.lang.String webSession;
 	/**所属房间*/
-	@Excel(name = "所属房间", width = 15)
+	
     @ApiModelProperty(value = "所属房间")
     private java.lang.String roomId;
 }

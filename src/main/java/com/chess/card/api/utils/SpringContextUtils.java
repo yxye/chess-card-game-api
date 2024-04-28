@@ -3,6 +3,7 @@ package com.chess.card.api.utils;
 
 import com.chess.card.api.constant.CommonConstant;
 import com.chess.card.api.constant.ServiceNameConstants;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
@@ -60,7 +61,7 @@ public class SpringContextUtils implements ApplicationContextAware {
 		StringBuffer url = request.getRequestURL();
 		//1.微服务情况下，获取gateway的basePath
 		String basePath = request.getHeader(ServiceNameConstants.X_GATEWAY_BASE_PATH);
-		if(oConvertUtils.isNotEmpty(basePath)){
+		if(StringUtils.isNotEmpty(basePath)){
 			return basePath;
 		}else{
 			String domain = url.delete(url.length() - request.getRequestURI().length(), url.length()).toString();

@@ -11,8 +11,8 @@ import com.baomidou.mybatisplus.annotation.TableLogic;
 import lombok.Data;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.jeecgframework.poi.excel.annotation.Excel;
-import org.jeecg.common.aspect.annotation.Dict;
+
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.EqualsAndHashCode;
@@ -53,19 +53,19 @@ public class GameInstance implements Serializable {
     @ApiModelProperty(value = "更新日期")
     private java.util.Date updateTime;
 	/**用户ID*/
-	@Excel(name = "用户ID", width = 15)
+	
     @ApiModelProperty(value = "用户ID")
     private java.lang.String userId;
 	/**房间*/
-	@Excel(name = "房间", width = 15)
+	
     @ApiModelProperty(value = "房间")
     private java.lang.String roomId;
 	/**当前步骤*/
-	@Excel(name = "当前步骤", width = 15)
+	
     @ApiModelProperty(value = "当前步骤")
     private java.lang.String stepName;
 	/**第几步*/
-	@Excel(name = "第几步", width = 15)
+	
     @ApiModelProperty(value = "第几步")
     private java.lang.Integer stepIndex;
 }

@@ -11,8 +11,8 @@ import com.baomidou.mybatisplus.annotation.TableLogic;
 import lombok.Data;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.jeecgframework.poi.excel.annotation.Excel;
-import org.jeecg.common.aspect.annotation.Dict;
+
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.EqualsAndHashCode;
@@ -53,23 +53,23 @@ public class PlayingCards implements Serializable {
     @ApiModelProperty(value = "更新日期")
     private java.util.Date updateTime;
 	/**牌值*/
-	@Excel(name = "牌值", width = 15)
+	
     @ApiModelProperty(value = "牌值")
     private java.lang.String cardId;
 	/**排序值*/
-	@Excel(name = "排序值", width = 15)
+	
     @ApiModelProperty(value = "排序值")
     private java.lang.String cardOrder;
 	/**经典背景*/
-	@Excel(name = "经典背景", width = 15)
+	
     @ApiModelProperty(value = "经典背景")
     private java.lang.String classicBg;
 	/**简单背景*/
-	@Excel(name = "简单背景", width = 15)
+	
     @ApiModelProperty(value = "简单背景")
     private java.lang.String simpleBg;
 	/**花色：H红桃，D方块，C梅花，S黑桃*/
-	@Excel(name = "花色：H红桃，D方块，C梅花，S黑桃", width = 15)
+	
     @ApiModelProperty(value = "花色：H红桃，D方块，C梅花，S黑桃")
     private java.lang.String cardSuit;
 }

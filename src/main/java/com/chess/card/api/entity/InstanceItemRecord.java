@@ -11,8 +11,8 @@ import com.baomidou.mybatisplus.annotation.TableLogic;
 import lombok.Data;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.jeecgframework.poi.excel.annotation.Excel;
-import org.jeecg.common.aspect.annotation.Dict;
+
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.EqualsAndHashCode;
@@ -53,27 +53,27 @@ public class InstanceItemRecord implements Serializable {
     @ApiModelProperty(value = "更新日期")
     private java.util.Date updateTime;
 	/**游戏记录*/
-	@Excel(name = "游戏记录", width = 15)
+	
     @ApiModelProperty(value = "游戏记录")
     private java.lang.String gameRecordId;
 	/**用户*/
-	@Excel(name = "用户", width = 15)
+	
     @ApiModelProperty(value = "用户")
     private java.lang.String userId;
 	/**当前步骤*/
-	@Excel(name = "当前步骤", width = 15)
+	
     @ApiModelProperty(value = "当前步骤")
     private java.lang.String stepName;
 	/**动作：1下注、2加注、、3盖牌、4放弃*/
-	@Excel(name = "动作：1下注、2加注、、3盖牌、4放弃", width = 15)
+	
     @ApiModelProperty(value = "动作：1下注、2加注、、3盖牌、4放弃")
     private java.lang.Integer action;
 	/**下注或加注金额*/
-	@Excel(name = "下注或加注金额", width = 15)
+	
     @ApiModelProperty(value = "下注或加注金额")
     private java.math.BigDecimal betAmount;
 	/**房间*/
-	@Excel(name = "房间", width = 15)
+	
     @ApiModelProperty(value = "房间")
     private java.lang.String roomId;
 }
