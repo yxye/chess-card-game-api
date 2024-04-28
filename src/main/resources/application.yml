@@ -1,0 +1,14 @@
+server:
+  servlet:
+    context-path: /sanyuan
+  port: 8709
+
+spring:
+  application:
+    name: @project.artifactId@
+  profiles:
+    active: dev
+
+
+
+
