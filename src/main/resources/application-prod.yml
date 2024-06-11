@@ -61,5 +61,12 @@ mybatis-plus:
     #log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
     # 返回类型为Map,显示null对应的字段
     call-setters-on-nulls: true
-
-
+knife4j:
+  #开启增强配置
+  enable: true
+  #开启生产环境屏蔽
+  production: false
+  basic:
+    enable: true
+    username: admin
+    password: admin2023!

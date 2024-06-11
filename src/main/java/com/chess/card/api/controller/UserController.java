@@ -93,7 +93,7 @@ public class UserController extends BaseController {
      * @param request
      * @return
      */
-    @ApiOperation(value = "发送短信验证码", notes = "找回密码与注册时都调用此交接口发送验证码！")
+    @ApiOperation(value = "发送短信验证码", notes = "找回密码与注册时都调用此交接口发送验证码 type:[register注册，reset找加密码！]")
     @PostMapping(value = "/sendSmsCode")
     public Result<String> sendSmsCode(@Validated @RequestBody SendSmsCodeBean sendSmsCodeBean, HttpServletRequest request) {
         String mobile = sendSmsCodeBean.getMobile();
@@ -164,7 +164,7 @@ public class UserController extends BaseController {
      * 后台生成图形验证码 ：有效
      * @param response
      */
-    @ApiOperation("获取验证码")
+    @ApiOperation(value = "获取图形验证码", notes = "获取图形验证码返回base64图片")
     @GetMapping(value = "/randomImage")
     public Result<String> randomImage(HttpServletResponse response) {
         Result<String> res = new Result<>();

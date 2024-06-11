@@ -23,7 +23,7 @@ public class RetrievePasswordBean implements Serializable {
     /**
      *短信验证码
      */
-    @ApiModelProperty(value="短信验证码",name="smsCode",example="888888",required = true)
+    @ApiModelProperty(value="短信验证码",name="smsCode",example="测试环境默认为888888",required = true)
     @NotBlank(message = "请输入短信验证码")
     @Pattern(regexp = "^[0-9]{6}$",message = "请输入正确的短信验证码！")
     private String smsCode;

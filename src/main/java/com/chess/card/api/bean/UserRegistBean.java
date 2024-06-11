@@ -27,7 +27,7 @@ public class UserRegistBean implements Serializable {
     /**
      * 短信验证码
      */
-    @ApiModelProperty(value="短信验证码",name="smsCode",example="888888",notes = "测试环境默认为888888",required = true)
+    @ApiModelProperty(value="短信验证码",name="smsCode",example="测试环境默认为888888",notes = "测试环境默认为888888",required = true)
     @NotBlank(message = "短信验证码不能为空！")
     private String smsCode;
 

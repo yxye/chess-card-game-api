@@ -1,5 +1,8 @@
 package com.chess.card.api.ws.api;
 
+import com.alibaba.ttl.TransmittableThreadLocal;
+import com.chess.card.api.security.model.SecurityUser;
+import com.chess.card.api.ws.DefaultWsContextService;
 import com.chess.card.api.ws.msg.EntityDataSubCtx;
 import com.chess.card.api.ws.msg.ParamsEntity;
 import com.chess.card.api.ws.msg.ResultEntity;
@@ -20,11 +23,16 @@ public class DefaultDataSchedulingService {
     @Autowired
     private WebsocketServiceScanning websocketServiceScanning;
 
+    @Autowired
+    private DefaultWsContextService defaultWsContextService;
+
 
     public <T> void execute(EntityDataSubCtx entityDataSubCtx) {
         ParamsEntity paramsEntity = entityDataSubCtx.getMsgEntity();
         WebSocketSessionRef sessionRef = entityDataSubCtx.getSessionRef();
         WebSocketService wsService = entityDataSubCtx.getWsService();
+        SecurityUser securityCtx = entityDataSubCtx.getSessionRef().getSecurityCtx();
+        defaultWsContextService.setSecurityUser(securityCtx);
         try {
             Object[] params = paramsEntity.getParams();
             String methodName = paramsEntity.getMethodName();

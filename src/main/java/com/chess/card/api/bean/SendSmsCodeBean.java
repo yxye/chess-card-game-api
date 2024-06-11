@@ -34,7 +34,7 @@ public class SendSmsCodeBean implements Serializable {
      * register 注册发送验证码
      * reset 重置密码
      */
-    @ApiModelProperty(value="类型参数",name="type",example="register",notes = "register注册，reset找加密码 可选值[register|reset]！",required = true)
+    @ApiModelProperty(value="类型参数",name="type",example="可选值[register|reset],register注册，reset找加密码",notes = "register注册，reset找加密码 可选值[register|reset]！",required = true)
     @NotBlank(message = "请选择类型参数")
     @Pattern(regexp = "(register|reset)",message = "type参数有误，可选值[register|reset]！")
     private String type;
