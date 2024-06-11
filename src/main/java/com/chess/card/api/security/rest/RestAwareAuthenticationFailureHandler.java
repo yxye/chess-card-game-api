@@ -1,7 +1,7 @@
 
-package com.chess.ws.api.security.rest;
+package com.chess.card.api.security.rest;
 
-import com.chess.ws.api.exception.ErrorResponseHandler;
+import com.chess.card.api.exception.ErrorResponseHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;

@@ -1,21 +1,22 @@
-package com.chess.ws.api.controller;
+package com.chess.card.api.controller;
 
 
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.util.RandomUtil;
-import com.chess.ws.api.bean.Result;
-import com.chess.ws.api.bean.RetrievePasswordBean;
-import com.chess.ws.api.bean.SendSmsCodeBean;
-import com.chess.ws.api.bean.UserRegistBean;
-import com.chess.ws.api.game.entity.UserInfo;
-import com.chess.ws.api.game.service.IUserInfoService;
-import com.chess.ws.api.bean.*;
-import com.chess.ws.api.exception.BuziException;
-import com.chess.ws.api.game.constant.CommonConstant;
-import com.chess.ws.api.game.service.ISmsService;
-import com.chess.ws.api.utils.Md5Util;
-import com.chess.ws.api.utils.RandImageUtil;
-import com.chess.ws.api.utils.RedisUtil;
+import com.chess.card.api.bean.Result;
+import com.chess.card.api.bean.RetrievePasswordBean;
+import com.chess.card.api.bean.SendSmsCodeBean;
+import com.chess.card.api.bean.UserRegistBean;
+import com.chess.card.api.game.entity.UserInfo;
+import com.chess.card.api.game.service.IUserInfoService;
+import com.chess.card.api.bean.*;
+import com.chess.card.api.exception.BuziException;
+import com.chess.card.api.game.constant.CommonConstant;
+import com.chess.card.api.game.service.ISmsService;
+import com.chess.card.api.utils.Md5Util;
+import com.chess.card.api.utils.RandImageUtil;
+import com.chess.card.api.utils.RedisUtil;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -29,6 +30,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+
+@Api(tags = "用户服务接口")
 @Slf4j
 @RequestMapping("/chess/user")
 @RestController
@@ -55,6 +58,7 @@ public class UserController extends BaseController {
      *
      * @param userRegistBean
      */
+    @ApiOperation(value = "用户注册", notes = "用于用户注册，注册后可登录！")
     @PostMapping("/register")
     public Result<String> userRegister(@Validated @RequestBody UserRegistBean userRegistBean) {
         //验证短信验证码
@@ -71,6 +75,8 @@ public class UserController extends BaseController {
      * 修改密码后需要注销账号登录的会话
      * @param retrievePassword
      */
+
+    @ApiOperation(value = "找回密码", notes = "忘记密码时，找加密码！")
     @PostMapping("/retrievePassword")
     public Result<String> retrievePassword(@Validated @RequestBody RetrievePasswordBean retrievePassword) {
         //验证短信验证码
@@ -83,11 +89,11 @@ public class UserController extends BaseController {
 
     /**
      * 发送短信验证码
-     *
      * @param sendSmsCodeBean
      * @param request
      * @return
      */
+    @ApiOperation(value = "发送短信验证码", notes = "找回密码与注册时都调用此交接口发送验证码！")
     @PostMapping(value = "/sendSmsCode")
     public Result<String> sendSmsCode(@Validated @RequestBody SendSmsCodeBean sendSmsCodeBean, HttpServletRequest request) {
         String mobile = sendSmsCodeBean.getMobile();

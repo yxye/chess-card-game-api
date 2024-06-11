@@ -1,6 +1,6 @@
-package com.chess.ws.api.game.service;
+package com.chess.card.api.game.service;
 
-import com.chess.ws.api.game.entity.GameInstanceRecord;
+import com.chess.card.api.game.entity.GameInstanceRecord;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**

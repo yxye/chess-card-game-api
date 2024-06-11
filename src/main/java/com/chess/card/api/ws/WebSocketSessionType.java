@@ -1,4 +1,4 @@
-package com.chess.ws.api.ws;
+package com.chess.card.api.ws;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

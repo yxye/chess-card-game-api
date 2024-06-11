@@ -1,4 +1,4 @@
-package com.chess.ws.api.security.rest;
+package com.chess.card.api.security.rest;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;

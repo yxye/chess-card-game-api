@@ -1,5 +1,5 @@
 
-package com.chess.ws.api.factory;
+package com.chess.card.api.factory;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.ForkJoinPool;

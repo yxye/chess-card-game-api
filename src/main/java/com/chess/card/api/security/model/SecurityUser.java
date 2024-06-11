@@ -1,6 +1,6 @@
-package com.chess.ws.api.security.model;
+package com.chess.card.api.security.model;
 
-import com.chess.ws.api.game.entity.UserInfo;
+import com.chess.card.api.game.entity.UserInfo;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

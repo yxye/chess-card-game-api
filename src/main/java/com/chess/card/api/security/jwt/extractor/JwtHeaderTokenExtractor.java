@@ -1,7 +1,7 @@
 
-package com.chess.ws.api.security.jwt.extractor;
+package com.chess.card.api.security.jwt.extractor;
 
-import com.chess.ws.api.config.SecurityConfiguration;
+import com.chess.card.api.config.SecurityConfiguration;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.stereotype.Component;

@@ -1,5 +1,5 @@
 
-package com.chess.ws.api.exception;
+package com.chess.card.api.exception;
 
 public class ThingsboardException extends Exception {
 

@@ -1,13 +1,13 @@
-package com.chess.ws.api.config;
+package com.chess.card.api.config;
 
-import com.chess.ws.api.exception.ErrorResponseHandler;
-import com.chess.ws.api.security.filter.JwtTokenAuthenticationProcessingFilter;
-import com.chess.ws.api.security.filter.RestLoginProcessingFilter;
-import com.chess.ws.api.security.jwt.SkipPathRequestMatcher;
-import com.chess.ws.api.security.jwt.extractor.TokenExtractor;
-import com.chess.ws.api.security.rest.JwtAuthenticationProvider;
-import com.chess.ws.api.security.rest.RefreshTokenAuthenticationProvider;
-import com.chess.ws.api.security.rest.RestAuthenticationProvider;
+import com.chess.card.api.exception.ErrorResponseHandler;
+import com.chess.card.api.security.filter.JwtTokenAuthenticationProcessingFilter;
+import com.chess.card.api.security.filter.RestLoginProcessingFilter;
+import com.chess.card.api.security.jwt.SkipPathRequestMatcher;
+import com.chess.card.api.security.jwt.extractor.TokenExtractor;
+import com.chess.card.api.security.rest.JwtAuthenticationProvider;
+import com.chess.card.api.security.rest.RefreshTokenAuthenticationProvider;
+import com.chess.card.api.security.rest.RestAuthenticationProvider;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;

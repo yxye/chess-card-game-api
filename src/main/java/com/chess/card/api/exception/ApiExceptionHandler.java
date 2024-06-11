@@ -1,7 +1,7 @@
-package com.chess.ws.api.exception;
+package com.chess.card.api.exception;
 
 
-import com.chess.ws.api.bean.Result;
+import com.chess.card.api.bean.Result;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.CollectionUtils;
 import org.springframework.validation.ObjectError;
@@ -24,7 +24,7 @@ import java.util.List;
  * @Date 2019
  */
 @Slf4j
-@RestControllerAdvice(basePackages = {"com.chess.ws.api.controller"})
+@RestControllerAdvice(basePackages = {"com.chess.card.api.controller"})
 @ResponseBody
 public class ApiExceptionHandler {
 	/**

@@ -1,8 +1,8 @@
-package com.chess.ws.api.ws.processor;
+package com.chess.card.api.ws.processor;
 
 import cn.hutool.core.util.ReflectUtil;
-import com.chess.ws.api.ws.annotation.WebSocketApiHandler;
-import com.chess.ws.api.ws.annotation.WebSocketApiService;
+import com.chess.card.api.ws.annotation.WebSocketApiHandler;
+import com.chess.card.api.ws.annotation.WebSocketApiService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeansException;

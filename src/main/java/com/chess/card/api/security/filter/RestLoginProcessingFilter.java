@@ -1,9 +1,9 @@
-package com.chess.ws.api.security.filter;
+package com.chess.card.api.security.filter;
 
 import com.alibaba.fastjson.JSON;
-import com.chess.ws.api.security.model.UserPrincipal;
+import com.chess.card.api.security.model.UserPrincipal;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.chess.ws.api.security.rest.LoginRequest;
+import com.chess.card.api.security.rest.LoginRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.authentication.AuthenticationServiceException;

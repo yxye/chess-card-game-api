@@ -1,8 +1,8 @@
-package com.chess.ws.api.game.service;
+package com.chess.card.api.game.service;
 
 
-import com.chess.ws.api.game.entity.UserInfo;
-import com.chess.ws.api.bean.RetrievePasswordBean;
+import com.chess.card.api.game.entity.UserInfo;
+import com.chess.card.api.bean.RetrievePasswordBean;
 import com.baomidou.mybatisplus.extension.service.IService;
 import org.springframework.security.core.AuthenticationException;
 

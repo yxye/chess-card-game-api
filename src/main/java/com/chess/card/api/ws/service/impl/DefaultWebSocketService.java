@@ -1,19 +1,19 @@
-package com.chess.ws.api.ws.service.impl;
+package com.chess.card.api.ws.service.impl;
 
-import com.chess.ws.api.factory.ChessThreadFactory;
-import com.chess.ws.api.utils.JacksonUtil;
-import com.chess.ws.api.ws.api.DefaultDataSchedulingService;
-import com.chess.ws.api.ws.msg.EntityDataSubCtx;
-import com.chess.ws.api.ws.msg.ParamsEntity;
-import com.chess.ws.api.ws.msg.ResultEntity;
-import com.chess.ws.api.ws.service.WebSocketService;
+import com.chess.card.api.factory.ChessThreadFactory;
+import com.chess.card.api.utils.JacksonUtil;
+import com.chess.card.api.ws.api.DefaultDataSchedulingService;
+import com.chess.card.api.ws.msg.EntityDataSubCtx;
+import com.chess.card.api.ws.msg.ParamsEntity;
+import com.chess.card.api.ws.msg.ResultEntity;
+import com.chess.card.api.ws.service.WebSocketService;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.chess.ws.api.factory.ChessExecutors;
-import com.chess.ws.api.ws.WebSocketMsgEndpoint;
-import com.chess.ws.api.ws.WebSocketSessionRef;
-import com.chess.ws.api.ws.data.WsSessionMetaData;
+import com.chess.card.api.factory.ChessExecutors;
+import com.chess.card.api.ws.WebSocketMsgEndpoint;
+import com.chess.card.api.ws.WebSocketSessionRef;
+import com.chess.card.api.ws.data.WsSessionMetaData;
 
-import com.chess.ws.api.ws.event.SessionEvent;
+import com.chess.card.api.ws.event.SessionEvent;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

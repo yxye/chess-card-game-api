@@ -1,4 +1,4 @@
-package com.chess.ws.api.ws.msg;
+package com.chess.card.api.ws.msg;
 
 import lombok.Data;
 

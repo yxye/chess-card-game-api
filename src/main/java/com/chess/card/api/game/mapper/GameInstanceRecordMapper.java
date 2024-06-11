@@ -1,6 +1,6 @@
-package com.chess.ws.api.game.mapper;
+package com.chess.card.api.game.mapper;
 
-import com.chess.ws.api.game.entity.GameInstanceRecord;
+import com.chess.card.api.game.entity.GameInstanceRecord;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**

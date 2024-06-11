@@ -1,13 +1,13 @@
-package com.chess.ws.api.game.service.impl;
+package com.chess.card.api.game.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 
-import com.chess.ws.api.game.entity.UserInfo;
-import com.chess.ws.api.game.mapper.UserInfoMapper;
-import com.chess.ws.api.bean.RetrievePasswordBean;
-import com.chess.ws.api.exception.BuziException;
-import com.chess.ws.api.game.service.IUserInfoService;
+import com.chess.card.api.game.entity.UserInfo;
+import com.chess.card.api.game.mapper.UserInfoMapper;
+import com.chess.card.api.bean.RetrievePasswordBean;
+import com.chess.card.api.exception.BuziException;
+import com.chess.card.api.game.service.IUserInfoService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;

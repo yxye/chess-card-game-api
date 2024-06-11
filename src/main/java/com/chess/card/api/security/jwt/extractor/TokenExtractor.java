@@ -1,4 +1,4 @@
-package com.chess.ws.api.security.jwt.extractor;
+package com.chess.card.api.security.jwt.extractor;
 
 import javax.servlet.http.HttpServletRequest;
 

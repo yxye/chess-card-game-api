@@ -1,5 +1,5 @@
 
-package com.chess.ws.api.factory;
+package com.chess.card.api.factory;
 
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.atomic.AtomicInteger;

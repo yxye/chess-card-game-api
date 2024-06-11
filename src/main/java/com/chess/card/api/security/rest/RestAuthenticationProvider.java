@@ -1,10 +1,10 @@
-package com.chess.ws.api.security.rest;
+package com.chess.card.api.security.rest;
 
 
-import com.chess.ws.api.game.entity.UserInfo;
-import com.chess.ws.api.game.service.IUserInfoService;
-import com.chess.ws.api.security.model.UserPrincipal;
-import com.chess.ws.api.security.model.SecurityUser;
+import com.chess.card.api.game.entity.UserInfo;
+import com.chess.card.api.game.service.IUserInfoService;
+import com.chess.card.api.security.model.UserPrincipal;
+import com.chess.card.api.security.model.SecurityUser;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;

@@ -1,8 +1,8 @@
-package com.chess.ws.api.security.filter;
+package com.chess.card.api.security.filter;
 
-import com.chess.ws.api.security.jwt.extractor.TokenExtractor;
-import com.chess.ws.api.security.jwt.JwtAuthenticationToken;
-import com.chess.ws.api.security.model.RawAccessJwtToken;
+import com.chess.card.api.security.jwt.extractor.TokenExtractor;
+import com.chess.card.api.security.jwt.JwtAuthenticationToken;
+import com.chess.card.api.security.model.RawAccessJwtToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;

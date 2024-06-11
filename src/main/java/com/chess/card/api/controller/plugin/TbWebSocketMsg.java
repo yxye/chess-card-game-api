@@ -1,5 +1,5 @@
 
-package com.chess.ws.api.controller.plugin;
+package com.chess.card.api.controller.plugin;
 
 public interface TbWebSocketMsg<T> {
 

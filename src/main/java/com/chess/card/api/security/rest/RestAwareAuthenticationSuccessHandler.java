@@ -1,9 +1,9 @@
-package com.chess.ws.api.security.rest;
+package com.chess.card.api.security.rest;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.chess.ws.api.security.model.JwtPair;
-import com.chess.ws.api.security.model.SecurityUser;
-import com.chess.ws.api.security.model.token.JwtTokenFactory;
+import com.chess.card.api.security.model.JwtPair;
+import com.chess.card.api.security.model.SecurityUser;
+import com.chess.card.api.security.model.token.JwtTokenFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;

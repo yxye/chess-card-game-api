@@ -1,8 +1,8 @@
-package com.chess.ws.api.game.service.impl;
+package com.chess.card.api.game.service.impl;
 
-import com.chess.ws.api.game.entity.InstancePrizePool;
-import com.chess.ws.api.game.mapper.InstancePrizePoolMapper;
-import com.chess.ws.api.game.service.IInstancePrizePoolService;
+import com.chess.card.api.game.entity.InstancePrizePool;
+import com.chess.card.api.game.mapper.InstancePrizePoolMapper;
+import com.chess.card.api.game.service.IInstancePrizePoolService;
 import org.springframework.stereotype.Service;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;

@@ -1,4 +1,4 @@
-package com.chess.ws.api.factory;
+package com.chess.card.api.factory;
 
 import lombok.NonNull;
 import lombok.ToString;

@@ -1,4 +1,4 @@
-package com.chess.ws.api.ws.event;
+package com.chess.card.api.ws.event;
 
 import lombok.Getter;
 import lombok.ToString;

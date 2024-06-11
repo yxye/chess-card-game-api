@@ -1,17 +1,17 @@
 
-package com.chess.ws.api.handle;
+package com.chess.card.api.handle;
 
-import com.chess.ws.api.config.WebSocketConfiguration;
-import com.chess.ws.api.controller.plugin.TbWebSocketMsg;
-import com.chess.ws.api.controller.plugin.TbWebSocketMsgType;
-import com.chess.ws.api.controller.plugin.TbWebSocketPingMsg;
-import com.chess.ws.api.controller.plugin.TbWebSocketTextMsg;
-import com.chess.ws.api.ws.WebSocketMsgEndpoint;
-import com.chess.ws.api.ws.WebSocketSessionRef;
-import com.chess.ws.api.ws.WebSocketSessionType;
-import com.chess.ws.api.ws.service.WebSocketService;
-import com.chess.ws.api.security.model.SecurityUser;
-import com.chess.ws.api.ws.event.SessionEvent;
+import com.chess.card.api.config.WebSocketConfiguration;
+import com.chess.card.api.controller.plugin.TbWebSocketMsg;
+import com.chess.card.api.controller.plugin.TbWebSocketMsgType;
+import com.chess.card.api.controller.plugin.TbWebSocketPingMsg;
+import com.chess.card.api.controller.plugin.TbWebSocketTextMsg;
+import com.chess.card.api.ws.WebSocketMsgEndpoint;
+import com.chess.card.api.ws.WebSocketSessionRef;
+import com.chess.card.api.ws.WebSocketSessionType;
+import com.chess.card.api.ws.service.WebSocketService;
+import com.chess.card.api.security.model.SecurityUser;
+import com.chess.card.api.ws.event.SessionEvent;
 import lombok.extern.slf4j.Slf4j;
 
 

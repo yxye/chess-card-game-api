@@ -1,6 +1,6 @@
 
 
-package com.chess.ws.api.utils;
+package com.chess.card.api.utils;
 
 import java.util.Arrays;
 import java.util.HashSet;

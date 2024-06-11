@@ -1,7 +1,7 @@
-package com.chess.ws.api.security.jwt;
+package com.chess.card.api.security.jwt;
 
-import com.chess.ws.api.security.model.JwtToken;
-import com.chess.ws.api.security.model.token.JwtTokenFactory;
+import com.chess.card.api.security.model.JwtToken;
+import com.chess.card.api.security.model.token.JwtTokenFactory;
 import io.jsonwebtoken.Claims;
 import org.springframework.stereotype.Service;
 

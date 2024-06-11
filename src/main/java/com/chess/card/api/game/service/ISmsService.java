@@ -1,4 +1,4 @@
-package com.chess.ws.api.game.service;
+package com.chess.card.api.game.service;
 
 public interface ISmsService {
 

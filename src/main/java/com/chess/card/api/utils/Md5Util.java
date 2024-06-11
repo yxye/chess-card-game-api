@@ -1,4 +1,4 @@
-package com.chess.ws.api.utils;
+package com.chess.card.api.utils;
 
 import java.security.MessageDigest;
 

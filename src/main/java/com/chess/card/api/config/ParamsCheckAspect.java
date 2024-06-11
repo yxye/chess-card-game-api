@@ -1,6 +1,6 @@
-package com.chess.ws.api.config;
+package com.chess.card.api.config;
 
-import com.chess.ws.api.exception.BuziException;
+import com.chess.card.api.exception.BuziException;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;

@@ -1,6 +1,6 @@
-package com.chess.ws.api.ws;
+package com.chess.card.api.ws;
 
-import com.chess.ws.api.security.model.SecurityUser;
+import com.chess.card.api.security.model.SecurityUser;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

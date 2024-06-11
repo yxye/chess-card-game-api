@@ -1,5 +1,5 @@
 
-package com.chess.ws.api.security.model;
+package com.chess.card.api.security.model;
 
 import java.io.Serializable;
 

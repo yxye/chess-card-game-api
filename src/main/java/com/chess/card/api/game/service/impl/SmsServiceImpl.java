@@ -1,9 +1,9 @@
-package com.chess.ws.api.game.service.impl;
+package com.chess.card.api.game.service.impl;
 
 import cn.hutool.core.date.DateUtil;
-import com.chess.ws.api.exception.BuziException;
-import com.chess.ws.api.game.service.ISmsService;
-import com.chess.ws.api.utils.RedisUtil;
+import com.chess.card.api.exception.BuziException;
+import com.chess.card.api.game.service.ISmsService;
+import com.chess.card.api.utils.RedisUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;

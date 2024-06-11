@@ -1,4 +1,4 @@
-package com.chess.ws.api.ws.annotation;
+package com.chess.card.api.ws.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

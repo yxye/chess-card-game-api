@@ -1,11 +1,11 @@
-package com.chess.ws.api.ws.api;
+package com.chess.card.api.ws.api;
 
-import com.chess.ws.api.ws.msg.EntityDataSubCtx;
-import com.chess.ws.api.ws.msg.ParamsEntity;
-import com.chess.ws.api.ws.msg.ResultEntity;
-import com.chess.ws.api.ws.processor.WebsocketServiceScanning;
-import com.chess.ws.api.ws.WebSocketSessionRef;
-import com.chess.ws.api.ws.service.WebSocketService;
+import com.chess.card.api.ws.msg.EntityDataSubCtx;
+import com.chess.card.api.ws.msg.ParamsEntity;
+import com.chess.card.api.ws.msg.ResultEntity;
+import com.chess.card.api.ws.processor.WebsocketServiceScanning;
+import com.chess.card.api.ws.WebSocketSessionRef;
+import com.chess.card.api.ws.service.WebSocketService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

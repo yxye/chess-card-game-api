@@ -1,7 +1,7 @@
 
-package com.chess.ws.api.exception;
+package com.chess.card.api.exception;
 
-import com.chess.ws.api.security.model.JwtToken;
+import com.chess.card.api.security.model.JwtToken;
 import org.springframework.security.core.AuthenticationException;
 
 public class JwtExpiredTokenException extends AuthenticationException {

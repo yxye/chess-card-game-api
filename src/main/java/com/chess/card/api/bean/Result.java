@@ -1,8 +1,8 @@
-package com.chess.ws.api.bean;
+package com.chess.card.api.bean;
 
 import com.alibaba.fastjson.JSON;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.chess.ws.api.game.constant.CommonConstant;
+import com.chess.card.api.game.constant.CommonConstant;
 import lombok.Data;
 
 

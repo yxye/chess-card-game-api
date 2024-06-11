@@ -1,4 +1,4 @@
-package com.chess.card.api.game.constant;
+package com.chess.card.api.constant;
 
 /**
  * @Description: 通用常量

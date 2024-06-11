@@ -1,8 +1,8 @@
-package com.chess.ws.api.security.model.token;
+package com.chess.card.api.security.model.token;
 
-import com.chess.ws.api.security.model.*;
-import com.chess.ws.api.exception.JwtExpiredTokenException;
-import com.chess.ws.api.security.model.*;
+import com.chess.card.api.security.model.*;
+import com.chess.card.api.exception.JwtExpiredTokenException;
+import com.chess.card.api.security.model.*;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jws;

@@ -1,4 +1,4 @@
-package com.chess.ws.api.exception;
+package com.chess.card.api.exception;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;

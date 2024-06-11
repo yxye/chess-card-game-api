@@ -1,5 +1,5 @@
 
-package com.chess.ws.api.security.jwt;
+package com.chess.card.api.security.jwt;
 
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.security.web.util.matcher.OrRequestMatcher;

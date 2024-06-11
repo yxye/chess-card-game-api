@@ -1,7 +1,7 @@
-package com.chess.ws.api.ws.msg;
+package com.chess.card.api.ws.msg;
 
-import com.chess.ws.api.ws.WebSocketSessionRef;
-import com.chess.ws.api.ws.service.WebSocketService;
+import com.chess.card.api.ws.WebSocketSessionRef;
+import com.chess.card.api.ws.service.WebSocketService;
 import lombok.Data;
 
 import java.io.Serializable;

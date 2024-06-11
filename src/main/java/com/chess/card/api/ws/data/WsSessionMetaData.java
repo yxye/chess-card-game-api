@@ -1,8 +1,8 @@
 
-package com.chess.ws.api.ws.data;
+package com.chess.card.api.ws.data;
 
 
-import com.chess.ws.api.ws.WebSocketSessionRef;
+import com.chess.card.api.ws.WebSocketSessionRef;
 
 /**
  * Created by ashvayka on 27.03.18.

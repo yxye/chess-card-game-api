@@ -1,4 +1,4 @@
-package com.chess.ws.api.utils;
+package com.chess.card.api.utils;
 
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletResponse;

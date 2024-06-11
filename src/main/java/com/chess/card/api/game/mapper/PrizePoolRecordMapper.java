@@ -1,6 +1,6 @@
-package com.chess.ws.api.game.mapper;
+package com.chess.card.api.game.mapper;
 
-import com.chess.ws.api.game.entity.PrizePoolRecord;
+import com.chess.card.api.game.entity.PrizePoolRecord;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**

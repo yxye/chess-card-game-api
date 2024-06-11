@@ -1,11 +1,11 @@
-package com.chess.ws.api.security.rest;
+package com.chess.card.api.security.rest;
 
-import com.chess.ws.api.security.jwt.TokenOutdatingService;
-import com.chess.ws.api.exception.JwtExpiredTokenException;
-import com.chess.ws.api.security.jwt.JwtAuthenticationToken;
-import com.chess.ws.api.security.model.RawAccessJwtToken;
-import com.chess.ws.api.security.model.SecurityUser;
-import com.chess.ws.api.security.model.token.JwtTokenFactory;
+import com.chess.card.api.security.jwt.TokenOutdatingService;
+import com.chess.card.api.exception.JwtExpiredTokenException;
+import com.chess.card.api.security.jwt.JwtAuthenticationToken;
+import com.chess.card.api.security.model.RawAccessJwtToken;
+import com.chess.card.api.security.model.SecurityUser;
+import com.chess.card.api.security.model.token.JwtTokenFactory;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationProvider;

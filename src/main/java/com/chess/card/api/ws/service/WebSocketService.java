@@ -1,8 +1,8 @@
-package com.chess.ws.api.ws.service;
+package com.chess.card.api.ws.service;
 
-import com.chess.ws.api.ws.msg.ResultEntity;
-import com.chess.ws.api.ws.WebSocketSessionRef;
-import com.chess.ws.api.ws.event.SessionEvent;
+import com.chess.card.api.ws.msg.ResultEntity;
+import com.chess.card.api.ws.WebSocketSessionRef;
+import com.chess.card.api.ws.event.SessionEvent;
 import org.springframework.web.socket.CloseStatus;
 
 public interface WebSocketService {

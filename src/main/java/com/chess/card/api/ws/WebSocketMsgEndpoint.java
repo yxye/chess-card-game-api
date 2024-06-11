@@ -1,4 +1,4 @@
-package com.chess.ws.api.ws;
+package com.chess.card.api.ws;
 
 import org.springframework.web.socket.CloseStatus;
 

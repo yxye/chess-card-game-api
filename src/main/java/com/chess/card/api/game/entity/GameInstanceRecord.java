@@ -1,4 +1,4 @@
-package com.chess.ws.api.game.entity;
+package com.chess.card.api.game.entity;
 
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;

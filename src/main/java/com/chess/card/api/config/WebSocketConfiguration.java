@@ -1,10 +1,10 @@
-package com.chess.ws.api.config;
+package com.chess.card.api.config;
 
-import com.chess.ws.api.exception.ErrorCode;
-import com.chess.ws.api.exception.ThingsboardException;
-import com.chess.ws.api.handle.TbWebSocketHandler;
+import com.chess.card.api.exception.ErrorCode;
+import com.chess.card.api.exception.ThingsboardException;
+import com.chess.card.api.handle.TbWebSocketHandler;
 
-import com.chess.ws.api.security.model.SecurityUser;
+import com.chess.card.api.security.model.SecurityUser;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;

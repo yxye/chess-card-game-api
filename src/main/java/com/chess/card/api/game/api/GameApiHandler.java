@@ -1,8 +1,8 @@
-package com.chess.ws.api.game.api;
+package com.chess.card.api.game.api;
 
 
-import com.chess.ws.api.ws.annotation.WebSocketApiHandler;
-import com.chess.ws.api.ws.annotation.WebSocketApiService;
+import com.chess.card.api.ws.annotation.WebSocketApiHandler;
+import com.chess.card.api.ws.annotation.WebSocketApiService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 

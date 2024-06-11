@@ -1,7 +1,7 @@
-package com.chess.ws.api.security.jwt;
+package com.chess.card.api.security.jwt;
 
-import com.chess.ws.api.security.model.RawAccessJwtToken;
-import com.chess.ws.api.security.model.SecurityUser;
+import com.chess.card.api.security.model.RawAccessJwtToken;
+import com.chess.card.api.security.model.SecurityUser;
 
 public class RefreshAuthenticationToken extends AbstractJwtAuthenticationToken {
 
