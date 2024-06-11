@@ -29,6 +29,7 @@
 		<knife4j-spring-boot-starter.version>4.4.0</knife4j-spring-boot-starter.version>
 		<knife4j-spring-ui.version>2.0.9</knife4j-spring-ui.version>
 		<druid.version>1.2.22</druid.version>
+		<ttl.version>2.11.4</ttl.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -144,6 +145,12 @@
 			<version>5.8.18</version>
 		</dependency>
 
+		<!--TTL-->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>transmittable-thread-local</artifactId>
+			<version>${ttl.version}</version>
+		</dependency>
 
 		<!-- mybatis-plus -->
 		<dependency>
