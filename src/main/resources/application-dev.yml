@@ -1,15 +1,11 @@
 spring:
-  mvc:
-    pathmatch:
-      #Springfox使用的路径匹配是基于AntPathMatcher的，而Spring Boot 2.6.X使用的是PathPatternMatcher 解决knife4j匹配boot2.6.7 boot版本过高的问题
-      matching-strategy: ant_path_matcher
   jpa:
-    show-sql: false
+    show-sql: true
   #    hibernate:
   #      ddl-auto: update
 
   datasource:
-    url: jdbc:mysql://192.168.11.208:3309/sanyuan-db?useUnicode=true&characterEncoding=UTF-8&serverTimezone=GMT%2B8&useSSL=false
+    url: jdbc:mysql://db.com:3309/poker-db?characterEncoding=UTF-8&useUnicode=true&useSSL=false&tinyInt1isBit=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Shanghai
     username: root
     password: root2019!
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -40,7 +36,7 @@ spring:
     database: 0
     host: redis.com
     port: 6379
-    password:
+    #password: BJDL_redis
     timeout: 10000
     jedis:
       pool:
@@ -49,27 +45,10 @@ spring:
         max-active: 2000
         max-wait: 10000
 
-  mail:
-    default-encoding: UTF-8
-    host: smtp.163.com
-    username: 17521346629@163.com
-    password: BXGCRJVBETGRWEZV
-    test-connection: true
-    port: 465
-    protocol: smtp
-    properties:
-      mail.smtp.auth: true
-      mail.smtp.starttls.enable: true
-      mail.smtp.starttls.required: true
-      mail.smtp.ssl.enable: true
-      mail.display.sendmail: spring-boot-demo
-
-
 #mybatis plus 设置
 mybatis-plus:
-  mapper-locations: classpath*:com/chess/**/xml/*Mapper.xml
+  mapper-locations: classpath*:**/mapper/*Mapper.xml
   global-config:
-    enable-sql-runner: true
     # 关闭MP3.0自带的banner
     banner: false
     db-config:
@@ -79,37 +58,8 @@ mybatis-plus:
       table-underline: true
   configuration:
     # 这个配置会将执行的sql打印出来，在开发或测试的时候可以用
-    # log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    #log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
     # 返回类型为Map,显示null对应的字段
     call-setters-on-nulls: true
-knife4j:
-  #开启增强配置
-  enable: true
-  setting:
-    enableDynamicParameter: true
-  #开启生产环境屏蔽
-  production: false
-  basic:
-    enable: false
-    username: admin
-    password: admin2023!
-
-
-static:
-  url: http://dev.local.19ye.net/static
-wx:
-  env: trial
-  miniapp:
-    appid: wx34aa05606e3ec844
-    secret: 59fcbe7e90f73fc0d06507199d51281e
-  mp:
-    useRedis: false
-    configs:
-      - appId: wx39929250a438d6eb # 第一个公众号的appid
-        secret: c9993d92d14c6b5eecf139db61ed60c8 # 公众号的appsecret
-        token: 8uy3rFUfehjcyebz # 接口配置里的Token值
-        aesKey: wuoduCg5JP6uauDXmolLIEKFGtwqtBvxIEIldGU6kNM # 接口配置里的EncodingAESKey值
-
-
 
 

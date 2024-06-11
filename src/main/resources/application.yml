@@ -1,14 +1,15 @@
 server:
+  port: 8086
+  tomcat:
+    max-swallow-size: -1
   servlet:
-    context-path: /poker
-  port: 8709
+    context-path: /
 
 spring:
+  main:
+    allow-bean-definition-overriding: true
   application:
-    name: @project.artifactId@
+    name: chess-api
   profiles:
     active: dev
-
-
-
 
