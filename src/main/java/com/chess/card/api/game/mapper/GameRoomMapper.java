@@ -1,0 +1,14 @@
+package com.chess.ws.api.game.mapper;
+
+import com.chess.ws.api.game.entity.GameRoom;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+
+/**
+ * @Description: 游戏房间
+ * @Author: jeecg-boot
+ * @Date:   2024-04-28
+ * @Version: V1.0
+ */
+public interface GameRoomMapper extends BaseMapper<GameRoom> {
+
+}
