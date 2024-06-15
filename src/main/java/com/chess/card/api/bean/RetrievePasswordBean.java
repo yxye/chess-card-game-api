@@ -15,10 +15,10 @@ public class RetrievePasswordBean implements Serializable {
     /**
      *电子邮箱
      */
-    @ApiModelProperty(value="电子邮箱",name="account",example="test123@163.com",required = true)
+    @ApiModelProperty(value="电子邮箱",name="email",example="test@163.com",required = true)
     @NotBlank(message = "请输入电子邮箱")
     @Pattern(regexp = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$",message = "请输入正确的电子邮箱！")
-    private String account;
+    private String email;
 
     /**
      *短信验证码

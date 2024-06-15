@@ -32,8 +32,8 @@ public class BaseController {
         return ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
     }
 
-    protected String buildSmsCacheKey(String mobile,String type){
-        return   "USER:OPERATION:AUTH:CODE:" + mobile + ":" + type + ":" + getSession().getId();
+    protected String buildAuthCacheKey(String flag, String type){
+        return   "USER:OPERATION:AUTH:CODE:" + flag + ":" + type + ":" + getSession().getId();
     }
 
     /**

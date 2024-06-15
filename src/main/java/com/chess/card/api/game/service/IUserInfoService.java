@@ -29,6 +29,8 @@ public interface IUserInfoService extends IService<UserInfo> {
      */
     public UserInfo getUserByMobile(String mobile);
 
+    public UserInfo getUserByEmail(String email);
+
 
     /**
      * 找回密码

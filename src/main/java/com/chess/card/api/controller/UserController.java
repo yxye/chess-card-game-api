@@ -8,6 +8,7 @@ import com.chess.card.api.bean.RetrievePasswordBean;
 import com.chess.card.api.bean.SendSmsCodeBean;
 import com.chess.card.api.bean.UserRegistBean;
 import com.chess.card.api.game.entity.UserInfo;
+import com.chess.card.api.game.mail.MailServiceImpl;
 import com.chess.card.api.game.service.IUserInfoService;
 import com.chess.card.api.bean.*;
 import com.chess.card.api.exception.BuziException;
@@ -50,6 +51,9 @@ public class UserController extends BaseController {
     @Autowired
     private ISmsService smsService;
 
+    @Autowired
+    private MailServiceImpl mailService;
+
     @Value("${spring.profiles.active}")
     private String active;
 
@@ -62,7 +66,7 @@ public class UserController extends BaseController {
     @PostMapping("/register")
     public Result<String> userRegister(@Validated @RequestBody UserRegistBean userRegistBean) {
         //验证短信验证码
-        checkSmsCode(userRegistBean.getMobile(),userRegistBean.getSmsCode(), REGISTER_TYPE);
+        checkAuthCode(userRegistBean.getEmail(),userRegistBean.getAuthCode(), REGISTER_TYPE);
         UserInfo userInfo = new UserInfo();
         BeanUtil.copyProperties(userRegistBean, userInfo);
         userInfoService.userRegister(userInfo);
@@ -75,12 +79,11 @@ public class UserController extends BaseController {
      * 修改密码后需要注销账号登录的会话
      * @param retrievePassword
      */
-
     @ApiOperation(value = "找回密码", notes = "忘记密码时，找加密码！")
     @PostMapping("/retrievePassword")
     public Result<String> retrievePassword(@Validated @RequestBody RetrievePasswordBean retrievePassword) {
         //验证短信验证码
-        checkSmsCode(retrievePassword.getMobile(),retrievePassword.getSmsCode(), RESET_TYPE);
+        checkAuthCode(retrievePassword.getMobile(),retrievePassword.getSmsCode(), RESET_TYPE);
 
         userInfoService.retrievePassword(retrievePassword);
 
@@ -122,7 +125,7 @@ public class UserController extends BaseController {
             this.smsService.checkLimitAndAdd(mobile, ip);
         }
 
-        String cacheKey = buildSmsCacheKey(mobile,type);
+        String cacheKey = buildAuthCacheKey(mobile,type);
 
         if (redisUtil.hasKey(cacheKey)) {
             return Result.ok("验证码已发送，请注意查收");
@@ -137,13 +140,13 @@ public class UserController extends BaseController {
     }
 
 
-    private void checkSmsCode(String mobile, String smsCode, String type) {
-        String cacheKey = buildSmsCacheKey(mobile,type);
+    private void checkAuthCode(String flag, String smsCode, String type) {
+        String cacheKey = buildAuthCacheKey(flag,type);
         String cacheSmsCode = redisUtil.get(cacheKey);
 
         if (cacheSmsCode == null || !cacheSmsCode.equals(smsCode)) {
-            log.warn("短信验证码错误， checkSmsCode cacheKey={},cacheSmsCode={},smsCode={}",cacheKey, cacheSmsCode, smsCode);
-            throw new BuziException(HttpStatus.PRECONDITION_FAILED.value(), "短信验证码错误");
+            log.warn("验证码错误， checkSmsCode cacheKey={},cacheSmsCode={},smsCode={}",cacheKey, cacheSmsCode, smsCode);
+            throw new BuziException(HttpStatus.PRECONDITION_FAILED.value(), "验证码错误");
         }
     }
 
@@ -191,9 +194,9 @@ public class UserController extends BaseController {
         return res;
     }
 
+
     /**
      * 退出登录
-     *
      * @param request
      * @param response
      * @return
@@ -209,5 +212,50 @@ public class UserController extends BaseController {
         return Result.ok("退出登录成功！");
     }
 
+
+    /**
+     * 发送邮件验证码
+     * @param sendMailCodeBean
+     * @param request
+     * @return
+     */
+    @ApiOperation(value = "发送邮件验证码", notes = "找回密码与注册时都调用此交接口发送验证码 type:[register注册，reset找加密码！]")
+    @PostMapping(value = "/sendMailCode")
+    public Result<String> sendMailCode(@Validated @RequestBody SendMailCodeBean sendMailCodeBean, HttpServletRequest request) {
+        String email = sendMailCodeBean.getEmail();
+        String type = sendMailCodeBean.getType();
+        UserInfo userInfo = this.userInfoService.getUserByEmail(email);
+        if (RESET_TYPE.equals(type)) {
+            if (userInfo == null) {
+                log.error("用户不存在 email={}", email);
+                Result.error("用户不存在！");
+            }
+        } else if (REGISTER_TYPE.equals(type)) {
+            if (userInfo != null) {
+                String account = userInfo.getAccount();
+                log.error("用户账号已存 email={},account={}", email, account);
+                Result.error("用户账号已存！！");
+            }
+        }
+
+        String code = RandomStringUtils.random(6, "1234567890");
+        boolean envState = "online".equals(active);
+        if (!envState) {
+            code = "888888";
+        }
+
+        String cacheKey = buildAuthCacheKey(email,type);
+
+        if (redisUtil.hasKey(cacheKey)) {
+            return Result.ok("验证码已发送，请注意查收");
+        }
+
+        if (envState) {
+            log.info("发送验证码 sendauthCode email={},code={}", email, code);
+            mailService.sendEmailCode(email, code);
+        }
+        redisUtil.set(cacheKey, code, 60 * 30);
+        return Result.ok("发送成功");
+    }
 
 }

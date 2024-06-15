@@ -10,33 +10,35 @@ import java.io.Serializable;
 public class UserRegistBean implements Serializable {
 
     /**
-     * 手机号码
+     * 邮箱
      */
-    @ApiModelProperty(value="手机号码",name="mobile",example="13745612336",required = true)
-    @NotBlank(message = "手机号不能为空！")
-    private String mobile;
+    @ApiModelProperty(value="邮箱",name="email",example="test@163.com",required = true)
+    @NotBlank(message = "邮箱不能为空！")
+    private String email;
+
+
+//    /**
+//     * 手机号码
+//     */
+//    @ApiModelProperty(value="手机号码",name="mobile",example="13745612336",required = false)
+//    @NotBlank(message = "手机号不能为空！")
+//    private String mobile;
+
+//    /**
+//     * 游戏账号
+//     */
+//    @ApiModelProperty(value="游戏账号",name="account",example="game001",required = false)
+//    @NotBlank(message = "游戏账号不能为空！")
+//    private String account;
+
 
     /**
      * 验证码
      */
-    @ApiModelProperty(value="图形验证码",name="verificationCode",example="e03z",required = true)
+    @ApiModelProperty(value="验证码",name="authCode",example="测试环境默认为888888",notes = "测试环境默认为888888",required = true)
     @NotBlank(message = "验证码不能为空！")
-    private String verificationCode;
+    private String authCode;
 
-
-    /**
-     * 短信验证码
-     */
-    @ApiModelProperty(value="短信验证码",name="smsCode",example="测试环境默认为888888",notes = "测试环境默认为888888",required = true)
-    @NotBlank(message = "短信验证码不能为空！")
-    private String smsCode;
-
-    /**
-     * 游戏账号
-     */
-    @ApiModelProperty(value="游戏账号",name="account",example="157532423",required = true)
-    @NotBlank(message = "游戏账号不能为空！")
-    private String account;
 
     /**
      * 密码

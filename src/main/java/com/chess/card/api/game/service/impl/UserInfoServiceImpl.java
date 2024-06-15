@@ -1,5 +1,6 @@
 package com.chess.card.api.game.service.impl;
 
+import cn.hutool.core.lang.Validator;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 
@@ -9,6 +10,7 @@ import com.chess.card.api.bean.RetrievePasswordBean;
 import com.chess.card.api.exception.BuziException;
 import com.chess.card.api.game.service.IUserInfoService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.AuthenticationException;
@@ -32,9 +34,33 @@ public class UserInfoServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> i
 
     @Override
     public UserInfo userRegister(UserInfo userInfo) {
+        String email = userInfo.getEmail();
+        if(StringUtils.isBlank(email)){
+            log.error("userRegister 注册失败 邮箱不能为空 email=null");
+            throw new BuziException("邮箱格式有误！");
+        }
+
+        if(!Validator.isEmail(email)){
+            log.error("userRegister 注册失败 邮箱格式有误 email={}",email);
+            throw new BuziException("邮箱格式有误！");
+        }
+
         String password = userInfo.getPassword();
+        if(StringUtils.isBlank(password)){
+            log.error("userRegister 注册失败 密码不能为空 email={}",email);
+            throw new BuziException("密码不能为空！");
+        }
+        if(password.length() > 18 || password.length() < 6){
+            log.error("userRegister 注册失败 密码长度必须在6到18位之间 password={}",password);
+            throw new BuziException("密码长度必须在6到18位之间！");
+        }
         userInfo.setPassword(passwordEncoder.encode(password));
         this.save(userInfo);
+
+        userInfo.setAccount(userInfo.getId());
+
+        this.updateById(userInfo);
+
         return userInfo;
     }
 
@@ -46,15 +72,22 @@ public class UserInfoServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> i
     }
 
     @Override
+    public UserInfo getUserByEmail(String email) {
+        LambdaQueryWrapper<UserInfo> queryWrapper = Wrappers.lambdaQuery();
+        queryWrapper.eq(UserInfo::getEmail,email);
+        return this.getOne(queryWrapper);
+    }
+
+    @Override
     public boolean retrievePassword(RetrievePasswordBean retrievePassword) {
-        String mobile = retrievePassword.getMobile();
+        String email = retrievePassword.getEmail();
         String password = retrievePassword.getPassword();
-        if(this.getUserByMobile(mobile) == null){
-            log.error("找回密码失败，用户不存在 mobile={}",mobile);
+        if(this.getUserByEmail(email) == null){
+            log.error("找回密码失败，用户不存在 email={}",email);
             throw new BuziException("用户不存在");
         }
         LambdaQueryWrapper<UserInfo> upWrapper = Wrappers.lambdaQuery();
-        upWrapper.eq(UserInfo::getMobile,mobile);
+        upWrapper.eq(UserInfo::getEmail,email);
         UserInfo upData = new UserInfo();
         upData.setPassword(passwordEncoder.encode(password));
         return this.update(upData,upWrapper);
@@ -67,13 +100,24 @@ public class UserInfoServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> i
 
     @Override
     public UserInfo userLogin(String account) {
-        LambdaQueryWrapper<UserInfo> queryWrapper = Wrappers.lambdaQuery();
-        queryWrapper.eq( UserInfo::getAccount,account).or((e)->{
-            e.eq(UserInfo::getEmail,account);
-        }).or((e)->{
-            e.eq(UserInfo::getMobile,account);
-        });
-        return this.getOne(queryWrapper);
+        UserInfo userInfo = this.getUserByEmail(account);
+
+        if(userInfo==null){
+            userInfo = this.getUserByMobile(account);
+        }
+
+        if(userInfo==null){
+            LambdaQueryWrapper<UserInfo> queryWrapper = Wrappers.lambdaQuery();
+            queryWrapper.eq(UserInfo::getAccount,account);
+            userInfo = this.getOne(queryWrapper);
+
+        }
+
+        if(userInfo != null && StringUtils.isBlank(userInfo.getAccount())){
+            userInfo.setAccount(userInfo.getId());
+        }
+
+        return userInfo;
     }
 
     @Override

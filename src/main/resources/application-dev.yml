@@ -1,4 +1,18 @@
 spring:
+  mail:
+    default-encoding: UTF-8
+    host: smtp.163.com
+    username: yxyehn@163.com
+    password: GMKODDDGGUKOSXII
+    test-connection: true
+    port: 465
+    protocol: smtp
+    properties:
+      mail.smtp.auth: true
+      mail.smtp.starttls.enable: true
+      mail.smtp.starttls.required: true
+      mail.smtp.ssl.enable: true
+      mail.display.sendmail: spring-boot-demo
   jpa:
     show-sql: true
   #    hibernate:

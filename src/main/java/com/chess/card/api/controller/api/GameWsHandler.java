@@ -10,18 +10,17 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
  *
  */
 
-@Api(tags = "用户服务接口(ws)")
+@Api(tags = "游戏服务接口(ws)")
 @Slf4j
 @WebSocketApiService
 @RestController
-public class UserWsHandler {
+public class GameWsHandler {
 
     @Autowired
     private DefaultWsContextService defaultWsContextService;
@@ -31,8 +30,8 @@ public class UserWsHandler {
 
 
     @ApiOperation(value = "查询用户信息", notes = "用于登录后查询用户信息！")
-    @WebSocketApiHandler("getUserInfo")
-    public UserInfo getUserInfo(){
+    @WebSocketApiHandler("gameList")
+    public UserInfo gameList(){
         SecurityUser securityUser = defaultWsContextService.getSecurityUser();
         return  userInfoService.getById(securityUser.getId());
     }
