@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chess.card.api.game.mapper.RoomInstanceMapper">
+    <resultMap id="extResultMap" type="com.chess.card.api.game.entity.RoomInstance">
+        <id column="id" jdbcType="VARCHAR" property="id" />
+        <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+        <result column="update_by" jdbcType="VARCHAR" property="updateBy" />
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+        <result column="room_id" jdbcType="VARCHAR" property="roomId" />
+        <result column="laps_num" jdbcType="INTEGER" property="lapsNum" />
+        <result column="act_user" jdbcType="VARCHAR" property="actUser" />
+        <result column="prize_pool" jdbcType="DECIMAL" property="prizePool" />
+        <result column="game_over_time" jdbcType="TIMESTAMP" property="gameOverTime" />
+        <result column="status" jdbcType="VARCHAR" property="status" />
+        <association property="gameRoom" column="{id=room_id}" select="com.chess.card.api.game.mapper.GameRoomMapper.selectById"/>
+    </resultMap>
+
+</mapper>
