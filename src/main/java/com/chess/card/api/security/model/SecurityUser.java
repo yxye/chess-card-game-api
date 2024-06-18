@@ -26,7 +26,21 @@ public class SecurityUser extends UserInfo implements Serializable {
      *
      */
     private UserPrincipal userPrincipal;
+
     private String sessionId;
+
+    /**
+     * 房间号
+     */
+    private String roomId;
+
+
+    /**
+     * 坐位号为空时是观看用户
+     */
+    private String seatId;
+
+
     public SecurityUser() {
         super();
     }

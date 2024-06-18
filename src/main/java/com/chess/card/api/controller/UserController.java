@@ -1,6 +1,5 @@
 package com.chess.card.api.controller;
 
-
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.util.RandomUtil;
 import com.chess.card.api.bean.Result;
@@ -31,11 +30,11 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
 @Api(tags = "用户服务接口")
 @Slf4j
 @RequestMapping("/chess/user")
 @RestController
+//@CrossOrigin(origins = "*")
 public class UserController extends BaseController {
 
     private String signatureSecret = "dd05f1c54d63749eda95f9fa6d49v442a";
@@ -118,7 +117,7 @@ public class UserController extends BaseController {
         checkVerificationCode(sendSmsCodeBean.getVerificationCode());
         String ip = this.getIpAddr(request);
         String code = RandomStringUtils.random(6, "1234567890");
-        boolean envState = "online".equals(active);
+        boolean envState = "prod".equals(active);
         if (!envState) {
             code = "888888";
         } else {
@@ -239,7 +238,7 @@ public class UserController extends BaseController {
         }
 
         String code = RandomStringUtils.random(6, "1234567890");
-        boolean envState = "online".equals(active);
+        boolean envState = "prod".equals(active);
         if (!envState) {
             code = "888888";
         }

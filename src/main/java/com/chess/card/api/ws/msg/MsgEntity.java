@@ -14,7 +14,7 @@ public class MsgEntity implements Serializable {
     private String methodName;
 
     /**
-     * callMethod|batchCallMethod|callResult
+     * callMethod|batchCallMethod|callResult|event
      */
     private String type;
 
@@ -26,6 +26,12 @@ public class MsgEntity implements Serializable {
     public MsgEntity(){
 
     }
+
+    public MsgEntity(String type,String eventName){
+        this.type = type;
+        this.methodName = eventName;
+    }
+
     public MsgEntity(ParamsEntity params){
         this.methodId= params.getMethodId();
         this.type= params.getType();

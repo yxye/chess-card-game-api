@@ -1,6 +1,6 @@
 package com.chess.card.api.game.service;
 
-import com.chess.card.api.game.entity.PlayingCards;
+import com.chess.card.api.game.entity.PlayCards;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -9,6 +9,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @Date:   2024-04-28
  * @Version: V1.0
  */
-public interface IPlayingCardsService extends IService<PlayingCards> {
+public interface IPlayCardsService extends IService<PlayCards> {
 
 }

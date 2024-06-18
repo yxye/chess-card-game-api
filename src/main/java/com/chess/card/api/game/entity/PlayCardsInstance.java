@@ -1,13 +1,11 @@
 package com.chess.card.api.game.entity;
 
 import java.io.Serializable;
-import java.io.UnsupportedEncodingException;
 import java.util.Date;
-import java.math.BigDecimal;
+
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.baomidou.mybatisplus.annotation.TableLogic;
 import lombok.Data;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -24,11 +22,11 @@ import lombok.experimental.Accessors;
  * @Version: V1.0
  */
 @Data
-@TableName("instance_playing_cards")
+@TableName("play_cards_instance")
 @Accessors(chain = true)
 @EqualsAndHashCode(callSuper = false)
-@ApiModel(value="instance_playing_cards对象", description="实例下的牌")
-public class InstancePlayingCards implements Serializable {
+@ApiModel(value="play_cards_instance对象", description="实例下的牌")
+public class PlayCardsInstance implements Serializable {
     private static final long serialVersionUID = 1L;
 
 	/**主键*/
@@ -51,24 +49,28 @@ public class InstancePlayingCards implements Serializable {
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     @ApiModelProperty(value = "更新日期")
     private Date updateTime;
+
 	/**实例*/
-	
     @ApiModelProperty(value = "实例")
     private String instanceId;
+
 	/**房间*/
-	
     @ApiModelProperty(value = "房间")
     private String roomId;
+
 	/**用户ID：-1公共牌*/
-	
     @ApiModelProperty(value = "用户ID：-1公共牌")
     private String userId;
+
 	/**扑克牌*/
-	
     @ApiModelProperty(value = "扑克牌")
     private String cardId;
+
 	/**排序*/
-	
     @ApiModelProperty(value = "排序")
     private String cardOrder;
+
+    /**花色：H红桃，D方块，C梅花，S黑桃*/
+    @ApiModelProperty(value = "花色：H红桃，D方块，C梅花，S黑桃")
+    private String cardSuit;
 }

@@ -51,7 +51,8 @@ public class WebsocketServiceScanning implements ApplicationContextAware, BeanPo
             return (T)ReflectionUtils.invokeMethod(method,target);
         }
        // Object[] args = params.stream().toArray(Object[]::new);
-        return  ReflectUtil.invoke(target,method,params);
+
+        return ReflectUtil.invoke(target,method,params);
     }
 
 

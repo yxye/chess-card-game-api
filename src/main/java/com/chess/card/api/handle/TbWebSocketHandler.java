@@ -57,7 +57,6 @@ public class TbWebSocketHandler extends TextWebSocketHandler implements WebSocke
 
     private final ConcurrentMap<String, String> externalSessionMap = new ConcurrentHashMap<>();
 
-
     @Autowired
     @Lazy
     private WebSocketService webSocketService;
@@ -65,7 +64,6 @@ public class TbWebSocketHandler extends TextWebSocketHandler implements WebSocke
     @Override
     public void handleTextMessage(WebSocketSession session, TextMessage message) {
         try {
-            log.info("WebSocketSession = {}", message);
             SessionMetaData sessionMd = internalSessionMap.get(session.getId());
             if (sessionMd != null) {
                 webSocketService.handleWebSocketMsg(sessionMd.sessionRef, message.getPayload());
@@ -151,9 +149,20 @@ public class TbWebSocketHandler extends TextWebSocketHandler implements WebSocke
         WebSocketSessionType sessionType = WebSocketSessionType.forName(serviceToken).orElseThrow(() -> new InvalidParameterException("Can't find plugin with specified token!"));
         //当前用户
         SecurityUser currentUser = (SecurityUser) ((Authentication) session.getPrincipal()).getPrincipal();
+
+        //TODO:有问题
+        String roomId = null;
+        try{
+            roomId = webSocketService.getUserRoomId(currentUser.getId());
+        }catch (Exception e){
+            roomId=null;
+        }
+        String sessionId = UUID.randomUUID().toString();
+        currentUser.setSessionId(sessionId);
         return WebSocketSessionRef.builder()
-                .sessionId(UUID.randomUUID().toString())
+                .sessionId(sessionId)
                 .securityCtx(currentUser)
+                .roomId(roomId)
                 .localAddress(session.getLocalAddress())
                 .remoteAddress(session.getRemoteAddress())
                 .sessionType(sessionType)

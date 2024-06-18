@@ -1,6 +1,6 @@
 package com.chess.card.api.game.mapper;
 
-import com.chess.card.api.game.entity.PlayingCards;
+import com.chess.card.api.game.entity.PlayCards;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
@@ -9,6 +9,6 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @Date:   2024-04-28
  * @Version: V1.0
  */
-public interface PlayingCardsMapper extends BaseMapper<PlayingCards> {
+public interface PlayCardsMapper extends BaseMapper<PlayCards> {
 
 }

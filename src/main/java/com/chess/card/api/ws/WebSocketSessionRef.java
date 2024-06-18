@@ -18,7 +18,20 @@ public class WebSocketSessionRef {
 
     private static final long serialVersionUID = 1L;
 
+    /**
+     *
+     */
     private final String sessionId;
+
+    /**
+     *
+     */
+    private final String roomId;
+
+    /**
+     *
+     */
+    private final String seatId;
 
     private final SecurityUser securityCtx;
     private final InetSocketAddress localAddress;

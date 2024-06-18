@@ -1,12 +1,13 @@
 package com.chess.card.api.controller.api;
 
+import com.chess.card.api.bean.room.RoomInfoVo;
+import com.chess.card.api.event.GameEventHandler;
 import com.chess.card.api.event.GameRoomEventProcessor;
-import com.chess.card.api.event.RoomEventProducer;
+
+import com.chess.card.api.exception.BuziException;
 import com.chess.card.api.game.entity.GameRoom;
-import com.chess.card.api.game.entity.UserInfo;
 import com.chess.card.api.game.service.IGameRoomService;
 import com.chess.card.api.game.service.IRoomUserService;
-import com.chess.card.api.game.service.IUserInfoService;
 import com.chess.card.api.security.model.SecurityUser;
 import com.chess.card.api.ws.DefaultWsContextService;
 import com.chess.card.api.ws.annotation.WebSocketApiHandler;
@@ -30,16 +31,13 @@ import java.util.List;
 public class RoomWsHandler {
 
     @Autowired
-    private DefaultWsContextService defaultWsContextService;
-
-    @Autowired
-    private IRoomUserService roomUserService;
-
-    @Autowired
     private IGameRoomService gameRoomService;
 
+    /**
+     *
+     */
     @Autowired
-    private GameRoomEventProcessor gameRoomEventProcessor;
+    private GameEventHandler gameEventHandler;
 
 
     @Autowired
@@ -56,17 +54,21 @@ public class RoomWsHandler {
      */
     @ApiOperation(value = "进入游戏房间", notes = "加入游戏房间！")
     @WebSocketApiHandler("enterGameRoom")
-    public void enterGameRoom(String roomId){
-        SecurityUser securityUser = defaultWsContextService.getSecurityUser();
-        gameRoomEventProcessor.subscribe(roomId,securityUser.getId());
+    public RoomInfoVo enterGameRoom(String roomId){
+        if(gameRoomService.getById(roomId) == null){
+            throw new BuziException("房间不存在！");
+        }
+        return gameEventHandler.addLookerUser(roomId);
     }
 
 
     @ApiOperation(value = "加入游戏", notes = "加入游戏房间！")
     @WebSocketApiHandler("joinGame")
-    public void joinGame(String roomId){
-        RoomEventProducer producer = gameRoomEventProcessor.getProducer(roomId);
-        producer.onData(roomId, "");
+    public void joinGame(Integer seatNo){
+        if(seatNo == null){
+            throw new BuziException("请选择座位");
+        }
+        gameEventHandler.joinGame(seatNo);
     }
 
 
@@ -74,14 +76,12 @@ public class RoomWsHandler {
     /**
      * 一.条件检查
      * 二.给用户发牌
-     *
-     *
      * @return
      */
     @ApiOperation(value = "开始游戏", notes = "开始游戏！")
     @WebSocketApiHandler("startGame")
     public void startGame(){
-
+        gameEventHandler.startGame();
     }
 
 }

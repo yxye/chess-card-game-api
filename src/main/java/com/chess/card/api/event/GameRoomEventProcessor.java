@@ -1,35 +1,39 @@
 package com.chess.card.api.event;
 
-import com.lmax.disruptor.BatchEventProcessor;
-import com.lmax.disruptor.LiteBlockingWaitStrategy;
-import com.lmax.disruptor.WaitStrategy;
+import com.lmax.disruptor.*;
 import com.lmax.disruptor.dsl.Disruptor;
-import com.lmax.disruptor.RingBuffer;
 import com.lmax.disruptor.dsl.ProducerType;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.checkerframework.checker.units.qual.A;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.ThreadFactory;
+import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
 
 @Slf4j
-@AllArgsConstructor
 @Service
 public class GameRoomEventProcessor {
-    private final ConcurrentHashMap<String, Disruptor<RoomEvent>> roomDisruptors;
-    private final ConcurrentHashMap<String, CopyOnWriteArrayList<UserEventHandler>> roomSubscribers;
-    private final ExecutorService executor;
+    private final ConcurrentHashMap<String, Disruptor<RoomEvent>> roomDisruptors = new ConcurrentHashMap<>();
+
+    @Autowired
+    private LookerUserEveentHandler lookerUserEveentHandler;
+
+    @Autowired
+    private RoomDbEventHandler roomDbEventHandler;
+
+    @Autowired
+    private RoomUserEventHandler roomUserEventHandler;
 
     static final AtomicInteger THREAD_INIT_NUMBER = new AtomicInteger(1);
-    private final int bufferSize;
+
+    private final int bufferSize = 1024;
+
     private String getName(Runnable r) {
 
         String domainEventHandlerName = "";
@@ -40,8 +44,8 @@ public class GameRoomEventProcessor {
                 eventHandler.setAccessible(true);
                 Object o = eventHandler.get(r);
 
-                if (o instanceof UserEventHandler) {
-                    domainEventHandlerName = ((UserEventHandler)o).getName();
+                if (o instanceof RoomUserEventHandler) {
+                    domainEventHandlerName = ((RoomUserEventHandler)o).getName();
                 }
             } catch (NoSuchFieldException | IllegalAccessException e) {
                 log.error(e.getMessage(), e);
@@ -65,10 +69,8 @@ public class GameRoomEventProcessor {
             nameParamList.add(domainEventHandlerName);
             // 编号
             nameParamList.add(String.valueOf(THREAD_INIT_NUMBER.getAndIncrement()));
-
             // 组合成线程名
             String threadName = String.join("-", nameParamList);
-
             Thread thread = new Thread(r);
             thread.setDaemon(true);
             thread.setName(threadName);
@@ -79,38 +81,63 @@ public class GameRoomEventProcessor {
 
 
     public void startRoom(String roomId) {
-        RoomEventFactory factory = new RoomEventFactory();
         // 自定义线程工厂
         ThreadFactory threadFactory = createThreadFactory(roomId);
+
         WaitStrategy waitStrategy = new LiteBlockingWaitStrategy();
+
         ProducerType producerType = ProducerType.MULTI;
 
-        Disruptor<RoomEvent> disruptor =new Disruptor<>(RoomEvent::new, bufferSize, threadFactory, producerType, waitStrategy);
+        Disruptor<RoomEvent> disruptor = new Disruptor<>(RoomEvent::new, bufferSize, threadFactory, producerType, waitStrategy);
+
+        disruptor.handleEventsWith(this.roomDbEventHandler,this.roomUserEventHandler,this.lookerUserEveentHandler);
+
         disruptor.start();
+
         roomDisruptors.put(roomId, disruptor);
-        roomSubscribers.put(roomId, new CopyOnWriteArrayList<>());
     }
 
+
+
+    /**
+     * 退出房间
+     * @param roomId
+     */
     public void stopRoom(String roomId) {
         Disruptor<RoomEvent> disruptor = roomDisruptors.remove(roomId);
         if (disruptor != null) {
             disruptor.shutdown();
         }
-        roomSubscribers.remove(roomId);
+        if(roomDisruptors.containsKey(roomId)){
+            roomDisruptors.remove(roomId);
+        }
     }
 
-    public void subscribe(String roomId, String userId) {
-        UserEventHandler handler = new UserEventHandler(userId);
-        roomSubscribers.get(roomId).add(handler);
-        roomDisruptors.get(roomId).handleEventsWith(handler);
-    }
 
-    public RoomEventProducer getProducer(String roomId) {
+
+    private RingBuffer<RoomEvent> getRingBuffer(String roomId) {
         Disruptor<RoomEvent> disruptor = roomDisruptors.get(roomId);
         if (disruptor == null) {
             throw new IllegalStateException("Room " + roomId + " is not started");
         }
-        return new RoomEventProducer(disruptor.getRingBuffer());
+        return disruptor.getRingBuffer();
+    }
+
+
+    public void sendMessage(String roomId, Object message,EventType eventType) {
+        RingBuffer<RoomEvent>  ringBuffer = getRingBuffer(roomId);
+        if(ringBuffer==null){
+            return;
+        }
+        long sequence = ringBuffer.next();
+        try {
+            RoomEvent event = ringBuffer.get(sequence);
+            event.setRoomId(roomId);
+            event.setEventType(eventType);
+            event.setMessage(message);
+        } finally {
+            ringBuffer.publish(sequence);
+        }
     }
 }
 

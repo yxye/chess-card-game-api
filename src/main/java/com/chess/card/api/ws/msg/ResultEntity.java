@@ -10,6 +10,13 @@ public class ResultEntity<T> extends MsgEntity{
 
     private String errorMsg;
 
+    public ResultEntity(T result,String type,String eventName) {
+        super(type,eventName);
+        this.status = true;
+        this.result = result;
+        this.setType(type);
+    }
+
 
     public ResultEntity(T result,ParamsEntity params) {
         super(params);

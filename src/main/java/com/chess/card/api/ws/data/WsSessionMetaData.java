@@ -9,7 +9,7 @@ import com.chess.card.api.ws.WebSocketSessionRef;
  */
 public class WsSessionMetaData {
     private WebSocketSessionRef sessionRef;
-    private long lastActivityTime;
+    private long lastActivityTime;//最后活动时间
 
     public WsSessionMetaData(WebSocketSessionRef sessionRef) {
         super();

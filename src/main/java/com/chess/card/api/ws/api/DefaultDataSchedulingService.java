@@ -27,12 +27,14 @@ public class DefaultDataSchedulingService {
     private DefaultWsContextService defaultWsContextService;
 
 
+
+
     public <T> void execute(EntityDataSubCtx entityDataSubCtx) {
         ParamsEntity paramsEntity = entityDataSubCtx.getMsgEntity();
         WebSocketSessionRef sessionRef = entityDataSubCtx.getSessionRef();
         WebSocketService wsService = entityDataSubCtx.getWsService();
         SecurityUser securityCtx = entityDataSubCtx.getSessionRef().getSecurityCtx();
-        defaultWsContextService.setSecurityUser(securityCtx);
+        defaultWsContextService.setEntityDataSubCtx(entityDataSubCtx);
         try {
             Object[] params = paramsEntity.getParams();
             String methodName = paramsEntity.getMethodName();
@@ -40,10 +42,23 @@ public class DefaultDataSchedulingService {
             ResultEntity<T> resultEntity = paramsEntity.buildResult(result);
             wsService.sendWsMsg(sessionRef, paramsEntity.getMethodId(), resultEntity);
         } catch (Exception e) {
+            String erroeMsg = getErrorMessage(e);
             log.info("execute error",e);
-            wsService.sendWsMsg(sessionRef, paramsEntity.getMethodId(), paramsEntity.buildResult(e.getMessage(), false));
+            wsService.sendWsMsg(sessionRef, paramsEntity.getMethodId(), paramsEntity.buildResult(erroeMsg, false));
         }
     }
+
+    public String  getErrorMessage(Exception e) {
+        for(int i=0;i<3;i++){
+            Throwable o = e.getCause();
+            if (o !=null && o  instanceof RuntimeException){
+                return e.getMessage();
+            }
+        }
+
+        return e.getMessage();
+    }
+
 
     private  <T> T getDefaultResult( Object[] params){
         if(params != null && params.length> 0){

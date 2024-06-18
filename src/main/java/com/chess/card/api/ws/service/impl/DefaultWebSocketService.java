@@ -1,8 +1,12 @@
 package com.chess.card.api.ws.service.impl;
 
+import com.chess.card.api.bean.room.RoomInfoVo;
+import com.chess.card.api.exception.BuziException;
 import com.chess.card.api.factory.ChessThreadFactory;
 import com.chess.card.api.utils.JacksonUtil;
+import com.chess.card.api.ws.DefaultWsContextService;
 import com.chess.card.api.ws.api.DefaultDataSchedulingService;
+import com.chess.card.api.ws.data.RoomUserData;
 import com.chess.card.api.ws.msg.EntityDataSubCtx;
 import com.chess.card.api.ws.msg.ParamsEntity;
 import com.chess.card.api.ws.msg.ResultEntity;
@@ -16,12 +20,17 @@ import com.chess.card.api.ws.data.WsSessionMetaData;
 import com.chess.card.api.ws.event.SessionEvent;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.springframework.web.socket.CloseStatus;
 
 import javax.annotation.PostConstruct;
 import java.io.IOException;
+import java.util.List;
+import java.util.UUID;
 import java.util.concurrent.*;
 
 @Slf4j
@@ -31,12 +40,22 @@ public class DefaultWebSocketService implements WebSocketService {
 
     private final ConcurrentMap<String, WsSessionMetaData> wsSessionsMap = new ConcurrentHashMap<>();
 
+    /**
+     * 房间用户
+     */
+    private final ConcurrentMap<String, RoomUserData> roomUserListMap = new ConcurrentHashMap<>();
+
+
+    @Autowired
+    private DefaultWsContextService defaultWsContextService;
+
     private ExecutorService executor;
     private ScheduledExecutorService scheduler;
 
     private ScheduledExecutorService pingExecutor;
 
     @Autowired
+    @Lazy
     private DefaultDataSchedulingService defaultDataSchedulingService;
 
     private final WebSocketMsgEndpoint msgEndpoint;
@@ -56,12 +75,36 @@ public class DefaultWebSocketService implements WebSocketService {
         pingExecutor = Executors.newSingleThreadScheduledExecutor(ChessThreadFactory.forName("check-web-socket-ping"));
 
         pingExecutor.scheduleWithFixedDelay(this::sendPing, pingTimeout / NUMBER_OF_PING_ATTEMPTS, pingTimeout / NUMBER_OF_PING_ATTEMPTS, TimeUnit.MILLISECONDS);
-
     }
 
     @Override
     public void handleWebSocketSessionEvent(WebSocketSessionRef sessionRef, SessionEvent event) {
         String sessionId = sessionRef.getSessionId();
+        String roomId = sessionRef.getRoomId();
+        if (StringUtils.isNotBlank(roomId)) {
+            RoomUserData roomUserData = roomUserListMap.get(roomId);
+            if (roomUserData == null) {
+                roomUserData = new RoomUserData();
+                roomUserListMap.put(roomId, roomUserData);
+            }
+
+            switch (event.getEventType()) {
+                case ESTABLISHED:
+                    roomUserData.addUser(sessionRef);
+                    break;
+                case ERROR:
+                    log.debug("[{}] Unknown websocket session error: {}. ", sessionId, event.getError().orElse(null));
+                    break;
+                case CLOSED:
+                    roomUserData.removeUser(sessionRef);
+                    //全部为空时删除掉
+                    if (roomUserData.isEmpty()) {
+                        roomUserListMap.remove(roomUserData);
+                    }
+                    break;
+            }
+        }
+
         switch (event.getEventType()) {
             case ESTABLISHED:
                 wsSessionsMap.put(sessionId, new WsSessionMetaData(sessionRef));
@@ -82,7 +125,7 @@ public class DefaultWebSocketService implements WebSocketService {
         }
     }
 
-    public  <T> void sendWsMsg(WebSocketSessionRef sessionRef, String cmdId, ResultEntity<T> update) {
+    public <T> void sendWsMsg(WebSocketSessionRef sessionRef, String cmdId, ResultEntity<T> update) {
         try {
             String msg = JacksonUtil.OBJECT_MAPPER.writeValueAsString(update);
             executor.submit(() -> {
@@ -115,10 +158,10 @@ public class DefaultWebSocketService implements WebSocketService {
         ParamsEntity msgEntity = JacksonUtil.fromString(msg, ParamsEntity.class);
         String type = msgEntity.getType();
         EntityDataSubCtx entityDataSubCtx = new EntityDataSubCtx(this, msgEntity, sessionRef);
-        if("ping".equals(type)){
+        if ("ping".equals(type)) {
             defaultDataSchedulingService.pesponsePing(entityDataSubCtx);
-        }else if("callMethod".equals(type)){
-            log.info("handleWebSocketMsg msgEntity={}",msgEntity.toString());
+        } else if ("callMethod".equals(type)) {
+            log.info("handleWebSocketMsg msgEntity={}", msgEntity.toString());
 
             defaultDataSchedulingService.execute(entityDataSubCtx);
         }
@@ -129,5 +172,103 @@ public class DefaultWebSocketService implements WebSocketService {
 
     }
 
+    @Override
+    public String getUserRoomId(String userId) {
+        return defaultWsContextService.getUserRoomId(userId);
+    }
+
+    @Override
+    public String getUserRoomIdBySessionId(String sessionId) {
+        WsSessionMetaData wsSessionMetaData = wsSessionsMap.get(sessionId);
+        String userId = wsSessionMetaData.getSessionRef().getSecurityCtx().getId();
+        return defaultWsContextService.getUserRoomId(userId);
+    }
+
+    public void addLookerUser(String roomId,String sessionId){
+        WsSessionMetaData wsSessionMetaData = this.wsSessionsMap.get(sessionId);
+        if(wsSessionMetaData == null){
+            return;
+        }
+        WebSocketSessionRef sessionRef = wsSessionMetaData.getSessionRef();
+        RoomUserData roomUserData = roomUserListMap.get(roomId);
+        if(roomUserData==null){
+            roomUserData = new RoomUserData();
+            roomUserListMap.put(roomId,roomUserData);
+        }
+        roomUserData.addLookerUser(sessionRef);
+    }
+
+
+    public void addRoomUser(String roomId,String sessionId){
+        WsSessionMetaData wsSessionMetaData = this.wsSessionsMap.get(sessionId);
+        if(wsSessionMetaData == null){
+            return;
+        }
+        WebSocketSessionRef sessionRef = wsSessionMetaData.getSessionRef();
+        RoomUserData roomUserData = roomUserListMap.get(roomId);
+        if(roomUserData==null){
+            roomUserData = new RoomUserData();
+            roomUserListMap.put(roomId,roomUserData);
+        }
+        roomUserData.addRoomUser(sessionRef);
+
+    }
+
+    @Override
+    public String addRoomUserBySessionId(String sessionId) {
+        WsSessionMetaData wsSessionMetaData = wsSessionsMap.get(sessionId);
+        if(wsSessionMetaData == null){
+            log.error("会话不存在 sessionId={}",sessionId);
+            throw new BuziException("会话不存在");
+        }
+        WebSocketSessionRef sessionRef = wsSessionMetaData.getSessionRef();
+        String roomId = defaultWsContextService.getUserRoomId(sessionRef.getSecurityCtx().getId());
+        RoomUserData roomUserData = roomUserListMap.get(roomId);
+        if(roomUserData==null){
+            roomUserData = new RoomUserData();
+            roomUserListMap.put(roomId,roomUserData);
+        }
+        roomUserData.addRoomUser(sessionRef);
+
+        return roomId;
+    }
+
+
+    public void notifyLookerUsers(String roomId, RoomInfoVo roomInfoVo){
+        RoomUserData roomUserData = roomUserListMap.get(roomId);
+        if(roomUserData == null){
+            return;
+        }
+
+        List<WebSocketSessionRef> lookerUser = roomUserData.getLookerUser();
+        if(CollectionUtils.isEmpty(lookerUser)){
+            return;
+        }
+
+        for(WebSocketSessionRef sessionRef :lookerUser){
+            ResultEntity<RoomInfoVo> resultEntity = new ResultEntity<>(roomInfoVo,"event","roomData");
+            this.sendWsMsg(sessionRef, UUID.randomUUID().toString(), resultEntity);
+        }
+
+    }
+
+
+    public void notifyRoomUsers(String roomId, RoomInfoVo roomInfoVo){
+        RoomUserData roomUserData = roomUserListMap.get(roomId);
+        if(roomUserData == null){
+            return;
+        }
+
+        List<WebSocketSessionRef> roomUsers = roomUserData.getRoomUser();
+        if(CollectionUtils.isEmpty(roomUsers)){
+            return;
+        }
+
+        for(WebSocketSessionRef sessionRef :roomUsers){
+            ResultEntity<RoomInfoVo> resultEntity = new ResultEntity<>(roomInfoVo,"event","roomData");
+            this.sendWsMsg(sessionRef, UUID.randomUUID().toString(), resultEntity);
+        }
+
+    }
 
 }
