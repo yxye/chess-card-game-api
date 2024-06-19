@@ -20,17 +20,19 @@ public class ServerStatusController  {
     @SendTo("/receive/message") //广播所有用户
     //传递的参数会自动的被注入到userbean中
     public String serverStatus (JSONObject receiveBean) throws InterruptedException {
+        return "tst";
+    }
 
+    @MessageMapping("/test")
+    @SendTo("/receive/message")
+    //传递的参数会自动的被注入到userbean中
+    public String test (String name) throws InterruptedException {
+        System.out.println("name=============="+name);
+        return "name=============="+name;
     }
     @Scheduled(fixedRate = 5000) //每个5秒提取一次
     @SendTo("/receive/message") //广播所有用户
     public String sendAllMessage () {
-
         return "callback";
     }
 }
-
-作者：逝水鎏金
-链接：https://juejin.cn/post/6844903816320516110
-来源：稀土掘金
-著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
