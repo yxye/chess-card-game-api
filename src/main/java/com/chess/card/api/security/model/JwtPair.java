@@ -16,7 +16,13 @@ public class JwtPair {
 
     private Authority scope;
 
-    public JwtPair(String token, String refreshToken) {
+    /**
+     * 有房间号说明在房间内
+     */
+    private String roomId;
+
+
+    public JwtPair(String token,String refreshToken) {
         this.token = token;
         this.refreshToken = refreshToken;
     }

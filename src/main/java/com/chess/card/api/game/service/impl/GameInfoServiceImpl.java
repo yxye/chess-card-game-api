@@ -9,7 +9,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 
 /**
  * @Description: 游戏信息
- * @Author: jeecg-boot
+ * @Author: yxye
  * @Date:   2024-06-15
  * @Version: V1.0
  */

@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
  * @Description: 房间实例
- * @Author: jeecg-boot
+ * @Author: yxye
  * @Date:   2024-06-16
  * @Version: V1.0
  */

@@ -58,7 +58,7 @@ public class RoomWsHandler {
         if(gameRoomService.getById(roomId) == null){
             throw new BuziException("房间不存在！");
         }
-        return gameEventHandler.addLookerUser(roomId);
+        return gameEventHandler.enterGameRoom(roomId);
     }
 
 

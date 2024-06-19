@@ -1,5 +1,6 @@
 package com.chess.card.api.security.rest;
 
+import com.chess.card.api.bean.Result;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.chess.card.api.security.model.JwtPair;
 import com.chess.card.api.security.model.SecurityUser;
@@ -29,10 +30,12 @@ public class RestAwareAuthenticationSuccessHandler implements AuthenticationSucc
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
                                         Authentication authentication) throws IOException, ServletException {
         SecurityUser securityUser = (SecurityUser) authentication.getPrincipal();
+
         JwtPair tokenPair = tokenFactory.createTokenPair(securityUser);
+
         response.setStatus(HttpStatus.OK.value());
         response.setContentType(MediaType.APPLICATION_JSON_VALUE);
-        mapper.writeValue(response.getWriter(), tokenPair);
+        mapper.writeValue(response.getWriter(), Result.ok(tokenPair));
 
         clearAuthenticationAttributes(request);
     }

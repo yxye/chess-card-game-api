@@ -13,7 +13,7 @@ import lombok.experimental.Accessors;
 
 /**
  * @Description: 房间实例
- * @Author: jeecg-boot
+ * @Author: yxye
  * @Date:   2024-06-16
  * @Version: V1.0
  */
@@ -67,11 +67,14 @@ public class RoomInstance implements Serializable {
      */
     private Date gameOverTime;
 
-    /**
-     * 状态
-     */
-    private String status;
 
     @TableField(exist = false)
     private GameRoom gameRoom;
+
+
+    /**
+     * 状态
+     * 初始NA,90等待,00游戏中,01结束,02暂停
+     */
+    private String status;
 }

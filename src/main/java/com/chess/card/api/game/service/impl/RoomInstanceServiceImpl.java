@@ -18,7 +18,7 @@ import java.math.BigDecimal;
 
 /**
  * @Description: 房间实例
- * @Author: jeecg-boot
+ * @Author: yxye
  * @Date:   2024-06-16
  * @Version: V1.0
  */
@@ -73,6 +73,7 @@ public class RoomInstanceServiceImpl extends ServiceImpl<RoomInstanceMapper, Roo
             result.setPrizePool(BigDecimal.ZERO);
             result.setLapsNum(0);
             result.setRoomId(roomId);
+            result.setStatus("NA");
             this.save(result);
         }else if(result != null){
             RoomInstance upData = new RoomInstance();
@@ -80,6 +81,7 @@ public class RoomInstanceServiceImpl extends ServiceImpl<RoomInstanceMapper, Roo
             upData.setPrizePool(BigDecimal.ZERO);
             upData.setLapsNum(0);
             upData.setActUser(null);
+            upData.setStatus("NA");
             this.update(upData,queryWrapper);
         }
         result.setGameRoom(gameRoom);

@@ -9,13 +9,11 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
+import org.checkerframework.checker.units.qual.K;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.redis.connection.RedisConnection;
-import org.springframework.data.redis.core.Cursor;
-import org.springframework.data.redis.core.RedisCallback;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.ScanOptions;
+import org.springframework.data.redis.core.*;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -175,8 +173,8 @@ public class RedisUtil {
      * @param item 项 不能为null
      * @return 值
      */
-    public Object hget(String key, String item) {
-        return redisTemplate.opsForHash().get(key, item);
+    public <T> T hget(String key, String item) {
+        return (T) redisTemplate.opsForHash().get(key, item);
     }
 
     /**
@@ -185,8 +183,9 @@ public class RedisUtil {
      * @param key 键
      * @return 对应的多个键值
      */
-    public Map<Object, Object> hmget(String key) {
-        return redisTemplate.opsForHash().entries(key);
+    public <T> Map<String, T> hmget(String key) {
+        HashOperations<String, String, T> hashMapOps = redisTemplate.opsForHash();
+        return (Map<String,T>) hashMapOps.entries(key);
     }
 
     /**
@@ -678,6 +677,16 @@ public class RedisUtil {
             if(time > 0){
                 redisTemplate.expire(key, time, TimeUnit.SECONDS);
             }
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean put(String key,String item, Object value){
+        try {
+            this.put(key,item,value,-1);
             return true;
         } catch (Exception e) {
             e.printStackTrace();

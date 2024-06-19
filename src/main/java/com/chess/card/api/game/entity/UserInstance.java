@@ -17,7 +17,7 @@ import lombok.experimental.Accessors;
 
 /**
  * @Description: 用户实例
- * @Author: jeecg-boot
+ * @Author: yxye
  * @Date:   2024-06-16
  * @Version: V1.0
  */

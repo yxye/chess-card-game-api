@@ -38,6 +38,8 @@ public class Result<T> implements Serializable {
 	 * 返回数据对象 data
 	 */
 	private T result;
+
+
 	
 	/**
 	 * 时间戳

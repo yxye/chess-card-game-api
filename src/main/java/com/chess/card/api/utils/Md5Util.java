@@ -4,7 +4,7 @@ import java.security.MessageDigest;
 
 /**
  * @Description: 加密工具
- * @author: jeecg-boot
+ * @author: yxye
  */
 public class Md5Util {
 

@@ -19,7 +19,7 @@ import lombok.experimental.Accessors;
 
 /**
  * @Description: 游戏房间模板
- * @Author: jeecg-boot
+ * @Author: yxye
  * @Date:   2024-04-28
  * @Version: V1.0
  */

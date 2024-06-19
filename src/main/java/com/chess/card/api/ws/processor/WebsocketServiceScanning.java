@@ -1,6 +1,7 @@
 package com.chess.card.api.ws.processor;
 
 import cn.hutool.core.util.ReflectUtil;
+import com.chess.card.api.exception.BuziException;
 import com.chess.card.api.ws.annotation.WebSocketApiHandler;
 import com.chess.card.api.ws.annotation.WebSocketApiService;
 import lombok.extern.slf4j.Slf4j;
@@ -37,12 +38,12 @@ public class WebsocketServiceScanning implements ApplicationContextAware, BeanPo
 
     public <T>  T invokeMethod(String methodName, Object...params){
         if(StringUtils.isBlank(methodName)){
-            throw new IllegalArgumentException("方法不能为空");
+            throw new BuziException("方法不能为空");
         }
 
         if(!serviceMethodCacheMap.containsKey(methodName)){
             log.error("方法不存在 methodName={}",methodName);
-            throw new IllegalArgumentException("方法不存在");
+            throw new BuziException("方法不存在");
         }
         Object target = serviceCacheMap.get(methodName);
 

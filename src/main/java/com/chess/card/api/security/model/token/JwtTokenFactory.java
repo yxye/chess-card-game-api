@@ -3,6 +3,7 @@ package com.chess.card.api.security.model.token;
 import com.chess.card.api.security.model.*;
 import com.chess.card.api.exception.JwtExpiredTokenException;
 import com.chess.card.api.security.model.*;
+import com.chess.card.api.service.IChessRoomService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jws;
@@ -15,6 +16,7 @@ import io.jsonwebtoken.UnsupportedJwtException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Component;
@@ -45,6 +47,8 @@ public class JwtTokenFactory {
     private static final String CUSTOMER_ID = "customerId";
     private static final String SESSION_ID = "sessionId";
 
+    @Autowired
+    private IChessRoomService chessRoomService;
 
     private String tokenSigningKey = "eXVpbjZEaTN0cmFwMWY5TW1tWEpnclpERzQyWE5mNmxuVlZHZUx3YUFUM0t2SWRZc29IVFdwVDBCbmc0NXN2aQ==";
 
@@ -177,7 +181,10 @@ public class JwtTokenFactory {
     public JwtPair createTokenPair(SecurityUser securityUser) {
         JwtToken accessToken = createAccessJwtToken(securityUser);
         JwtToken refreshToken = createRefreshToken(securityUser);
-        return new JwtPair(accessToken.getToken(), refreshToken.getToken());
+        JwtPair result = new JwtPair(accessToken.getToken(), refreshToken.getToken());
+        String roomId = chessRoomService.getUserRoomId(securityUser.getId());
+        result.setRoomId(roomId);
+        return result;
     }
 
 }

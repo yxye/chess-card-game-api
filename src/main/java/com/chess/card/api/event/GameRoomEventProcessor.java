@@ -81,6 +81,9 @@ public class GameRoomEventProcessor {
 
 
     public void startRoom(String roomId) {
+        if(roomDisruptors.containsKey(roomId)){
+            return;
+        }
         // 自定义线程工厂
         ThreadFactory threadFactory = createThreadFactory(roomId);
 

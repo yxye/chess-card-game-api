@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
  * @Description: 扑克牌
- * @Author: jeecg-boot
+ * @Author: yxye
  * @Date:   2024-04-28
  * @Version: V1.0
  */

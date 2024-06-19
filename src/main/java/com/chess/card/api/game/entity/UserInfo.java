@@ -20,7 +20,7 @@ import lombok.experimental.Accessors;
 
 /**
  * @Description: 玩家信息
- * @Author: jeecg-boot
+ * @Author: yxye
  * @Date:   2024-04-28
  * @Version: V1.0
  */

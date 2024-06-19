@@ -19,7 +19,7 @@ import lombok.experimental.Accessors;
 
 /**
  * @Description: 房间用户
- * @Author: jeecg-boot
+ * @Author: yxye
  * @Date:   2024-04-28
  * @Version: V1.0
  */
@@ -55,16 +55,23 @@ public class RoomUser implements Serializable {
 	
     @ApiModelProperty(value = "用户")
     private String userId;
+
 	/**座位顺序*/
-	
     @ApiModelProperty(value = "座位顺序")
-    private Integer seqtIndex;
+    private Integer seatNo;
+
 	/**用户session*/
-	
     @ApiModelProperty(value = "用户session")
-    private String webSession;
+    private String sessionId;
+
 	/**所属房间*/
-	
     @ApiModelProperty(value = "所属房间")
     private String roomId;
+    
+    /**类型：1观看用户，2游戏用户*/
+    private Integer  userType;
+
+
+    /**状态：1正常，0离线*/
+    private Integer  status;
 }

@@ -23,7 +23,7 @@ import java.util.List;
 
 /**
  * @Description: 用户实例
- * @Author: jeecg-boot
+ * @Author: yxye
  * @Date:   2024-06-16
  * @Version: V1.0
  */
@@ -70,9 +70,10 @@ public class UserInstanceServiceImpl extends ServiceImpl<UserInstanceMapper, Use
         return this.count(queryWrapper);
     }
 
-    public UserInstance getSeatNoUser(String userId,Integer seatNo) {
+
+    public UserInstance getSeatNoUser(String roomInstanceId,Integer seatNo) {
         LambdaQueryWrapper<UserInstance> queryWrapper = Wrappers.lambdaQuery();
-        queryWrapper.eq(UserInstance::getUserId,userId);
+        queryWrapper.eq(UserInstance::getRoomInstanceId,roomInstanceId);
         queryWrapper.eq(UserInstance::getSeatNo,seatNo);
         return this.getOne(queryWrapper);
     }
@@ -98,7 +99,7 @@ public class UserInstanceServiceImpl extends ServiceImpl<UserInstanceMapper, Use
             log.error("座位号有误,userId={},seatNo={}",userId,seatNo);
             throw new BuziException("座位号有误");
         }
-        UserInstance seatNoUser = this.getSeatNoUser(userId, seatNo);
+        UserInstance seatNoUser = this.getSeatNoUser(roomInstance.getId(), seatNo);
         if(seatNoUser != null){
             log.error("座位已有用户存在,userId={},seatNo={},seatUserId={}",userId,seatNo,seatNoUser.getUserId());
             throw new BuziException("座位已有用户存在");

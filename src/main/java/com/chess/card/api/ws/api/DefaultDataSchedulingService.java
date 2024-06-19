@@ -12,6 +12,7 @@ import com.chess.card.api.ws.service.WebSocketService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
 import java.util.Date;
 
@@ -27,9 +28,15 @@ public class DefaultDataSchedulingService {
     private DefaultWsContextService defaultWsContextService;
 
 
-
+    @Autowired
+    private RequestMappingHandlerMapping requestMappingHandlerMapping;
 
     public <T> void execute(EntityDataSubCtx entityDataSubCtx) {
+
+
+    }
+
+    public <T> void execute2(EntityDataSubCtx entityDataSubCtx) {
         ParamsEntity paramsEntity = entityDataSubCtx.getMsgEntity();
         WebSocketSessionRef sessionRef = entityDataSubCtx.getSessionRef();
         WebSocketService wsService = entityDataSubCtx.getWsService();
@@ -49,14 +56,19 @@ public class DefaultDataSchedulingService {
     }
 
     public String  getErrorMessage(Exception e) {
-        for(int i=0;i<3;i++){
-            Throwable o = e.getCause();
-            if (o !=null && o  instanceof RuntimeException){
-                return e.getMessage();
+        try {
+            Throwable o = e;
+            for (int i = 0; i < 3; i++) {
+                if (o != null && o.getClass().getName().contains("com.chess.card")) {
+                    return o.getMessage();
+                }
+                o = o.getCause();
             }
-        }
 
-        return e.getMessage();
+            return e.getMessage();
+        }catch (Exception ex){
+            return "操作失败";
+        }
     }
 
 
